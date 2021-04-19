@@ -1,0 +1,4 @@
+rootProject.name = 'lab9x-SavinaRuxandra'
+include 'core'
+include 'web'
+
