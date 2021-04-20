@@ -14,7 +14,7 @@ public interface ClientService {
 
     List<Client> getAllClients();
 
-    Client getClientByID(Long id);
+    Client getClientById(Long id);
 
     List<Client> filterClientsByName(String name);
 

@@ -1,11 +1,10 @@
 package intrusii.web.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import intrusii.core.model.Client;
-import intrusii.core.model.Subscription;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,9 +15,12 @@ import java.time.LocalDate;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
+@Builder
 public class ContractDto extends BaseDto {
-    private Client client;
-    private Subscription subscription;
+    private Long clientId;
+    private String clientName;
+    private Long subscriptionId;
+    private String subscriptionType;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)

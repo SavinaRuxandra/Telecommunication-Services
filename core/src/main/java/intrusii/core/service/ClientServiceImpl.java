@@ -50,7 +50,7 @@ public class ClientServiceImpl implements ClientService {
 
         clientRepository.findById(id).orElseThrow(() -> new ServiceException("Entity does not exist"));
 
-        deleteContractByClientID(id);
+        deleteContractByClientId(id);
         clientRepository.deleteById(id);
 
         log.trace("deleteClient - method finished");
@@ -69,7 +69,7 @@ public class ClientServiceImpl implements ClientService {
                     newClient.setEmail(client.getEmail());
                     newClient.setAddress(client.getAddress());
                     log.debug("updateClient - updated: c={}", newClient);
-                }, () -> {throw new ServiceException("There is no client with this is");});
+                }, () -> {throw new ServiceException("There is no client with this id");});
         log.trace("updateClient - method finished");
         return client;
     }
@@ -84,7 +84,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client getClientByID(Long id) throws ServiceException {
+    public Client getClientById(Long id) throws ServiceException {
         log.trace("getClientByID - method entered: id={}", id);
 
         if(id == null){
@@ -97,7 +97,7 @@ public class ClientServiceImpl implements ClientService {
         return client;
     }
 
-    private void deleteContractByClientID(Long id) {
+    private void deleteContractByClientId(Long id) {
         log.trace("deleteContractByClientID - method entered: id={}", id);
 
         contractRepository.findAll().stream().filter(contract -> contract.getClient().getId().equals(id)).forEach(contract -> contractRepository.deleteById(contract.getId()));

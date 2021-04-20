@@ -1,0 +1,43 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #4caf50;
+  color: white;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+.contracts tr {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  margin: .5em;
+  padding: .3em 0;
+  height: 1.6em;
+  border-radius: 4px;
+}
+.contracts tr:hover {
+  color: #2c3a41;
+  background-color: #e6e6e6;
+  left: .1em;
+}
+.contracts tr.selected {
+  background-color: #d0d0d0;
+  color: white;
+}
+.contracts tr.selected:hover {
+  background-color: #cacaca;
+  color: white;
+}
+
+input {
+  padding: .5rem;
+}

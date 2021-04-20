@@ -1,15 +1,18 @@
 package intrusii.web.controller;
 
+import intrusii.core.model.Contract;
 import intrusii.core.service.ContractService;
 import intrusii.web.converter.ContractConverter;
 import intrusii.web.dto.ContractDto;
-import intrusii.web.dto.ContractsDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequestMapping(value = "/contracts")
 @RestController
@@ -57,15 +60,13 @@ public class ContractController {
     }
 
     @RequestMapping(value = "")
-    ContractsDto getAllContracts() {
+    List<ContractDto> getAllContracts() {
         log.trace("getAllContracts - method entered");
 
-        ContractsDto contracts = new ContractsDto(
-                contractConverter.convertModelsToDtos(
-                        contractService.getAllContracts()));
+        List<Contract> contracts = contractService.getAllContracts();
 
         log.trace("getAllContracts - method finished: contracts={}", contracts);
-        return contracts;
+        return new ArrayList<>(contractConverter.convertModelsToDtos(contracts));
     }
 
     @RequestMapping(value = "/byId", method = RequestMethod.POST)
@@ -80,14 +81,12 @@ public class ContractController {
     }
 
     @RequestMapping(value = "/filterActive")
-    ContractsDto filterActiveContracts() {
+    List<ContractDto> filterActiveContracts() {
         log.trace("filterActiveContracts - method entered");
 
-        ContractsDto contracts = new ContractsDto(
-                contractConverter.convertModelsToDtos(
-                        contractService.filterActiveContracts()));
+        List<Contract> contracts = contractService.filterActiveContracts();
 
         log.trace("filterActiveContracts - method finished: contracts={}", contracts);
-        return contracts;
+        return new ArrayList<>(contractConverter.convertModelsToDtos(contracts));
     }
 }

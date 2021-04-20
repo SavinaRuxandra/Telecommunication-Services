@@ -8,17 +8,22 @@ import org.springframework.stereotype.Component;
 public class SubscriptionConverter extends BaseConverter<Subscription, SubscriptionDto> {
     @Override
     public Subscription convertDtoToModel(SubscriptionDto dto) {
-        var model = new Subscription();
+        Subscription model =Subscription.builder()
+                .type(dto.getType())
+                .duration(dto.getDuration())
+                .price(dto.getPrice())
+                .build();
         model.setId(dto.getId());
-        model.setType(dto.getType());
-        model.setPrice(dto.getPrice());
-        model.setDuration(dto.getDuration());
         return model;
     }
 
     @Override
     public SubscriptionDto convertModelToDto(Subscription subscription) {
-        SubscriptionDto dto = new SubscriptionDto(subscription.getType(), subscription.getPrice(), subscription.getDuration());
+        SubscriptionDto dto = SubscriptionDto.builder()
+                .type(subscription.getType())
+                .duration(subscription.getDuration())
+                .price(subscription.getPrice())
+                .build();
         dto.setId(subscription.getId());
         return dto;
     }

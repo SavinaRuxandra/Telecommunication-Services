@@ -1,16 +1,19 @@
 package intrusii.web.controller;
 
+import intrusii.core.model.Subscription;
 import intrusii.core.model.SubscriptionType;
 import intrusii.core.service.SubscriptionService;
 import intrusii.web.converter.SubscriptionConverter;
 import intrusii.web.dto.SubscriptionDto;
-import intrusii.web.dto.SubscriptionsDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequestMapping(value = "/subscriptions")
 @RestController
@@ -58,15 +61,13 @@ public class SubscriptionController {
     }
 
     @RequestMapping(value = "")
-    SubscriptionsDto getAllSubscriptions() {
+    List<SubscriptionDto> getAllSubscriptions() {
         log.trace("getAllSubscriptions - method entered");
 
-        SubscriptionsDto subscriptions = new SubscriptionsDto(
-                subscriptionConverter.convertModelsToDtos(
-                        subscriptionService.getAllSubscriptions()));
+        List<Subscription> subscriptions = subscriptionService.getAllSubscriptions();
 
         log.trace("getAllSubscriptions - method finished: subscriptions={}", subscriptions);
-        return subscriptions;
+        return new ArrayList<>(subscriptionConverter.convertModelsToDtos(subscriptions));
     }
 
     @RequestMapping(value = "/byId", method = RequestMethod.POST)
@@ -81,26 +82,22 @@ public class SubscriptionController {
     }
 
     @RequestMapping(value = "/filterByDuration", method = RequestMethod.POST)
-    SubscriptionsDto filterSubscriptionByDuration(@RequestBody int duration) {
+    List<SubscriptionDto> filterSubscriptionByDuration(@RequestBody int duration) {
         log.trace("filterSubscriptionByDuration - method entered");
 
-        SubscriptionsDto subscriptionsDto = new SubscriptionsDto(
-                subscriptionConverter.convertModelsToDtos(
-                        subscriptionService.filterSubscriptionByDuration(duration)));
+        List<Subscription> subscriptions = subscriptionService.filterSubscriptionByDuration(duration);
 
-        log.trace("filterSubscriptionByDuration - method finished: subscriptions={}", subscriptionsDto);
-        return subscriptionsDto;
+        log.trace("filterSubscriptionByDuration - method finished: subscriptions={}", subscriptions);
+        return new ArrayList<>(subscriptionConverter.convertModelsToDtos(subscriptions));
     }
 
     @RequestMapping(value = "/filterByType", method = RequestMethod.POST)
-    SubscriptionsDto filterSubscriptionByType(@RequestBody SubscriptionType type) {
+    List<SubscriptionDto> filterSubscriptionByType(@RequestBody SubscriptionType type) {
         log.trace("filterSubscriptionByType - method entered");
 
-        SubscriptionsDto subscriptionsDto = new SubscriptionsDto(
-                subscriptionConverter.convertModelsToDtos(
-                        subscriptionService.filterSubscriptionByType(type)));
+        List<Subscription> subscriptions = subscriptionService.filterSubscriptionByType(type);
 
-        log.trace("filterSubscriptionByType - method finished: subscriptions={}", subscriptionsDto);
-        return subscriptionsDto;
+        log.trace("filterSubscriptionByType - method finished: subscriptions={}", subscriptions);
+        return new ArrayList<>(subscriptionConverter.convertModelsToDtos(subscriptions));
     }
 }

@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
+@Builder
 public class Contract extends BaseEntity<Long> {
     @ManyToOne
     @JoinColumn(name="clientId")
