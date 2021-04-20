@@ -74,7 +74,7 @@ public class ClientController {
         log.trace("getClientById - method entered: id={}", id);
 
         ClientDto clientDto = clientConverter.convertModelToDto(
-                clientService.getClientByID(id));
+                clientService.getClientById(id));
 
         log.trace("getClientById - method finished: client={}", clientDto);
         return clientDto;

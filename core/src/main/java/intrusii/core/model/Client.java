@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
+@Builder
 public class Client extends BaseEntity<Long> {
     private String cnp;
     private String name;

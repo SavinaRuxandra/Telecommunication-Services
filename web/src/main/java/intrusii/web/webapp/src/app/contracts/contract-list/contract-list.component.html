@@ -1,0 +1,15 @@
+<h2 id = "title">Contracts</h2>
+
+<table>
+  <tr>
+    <th>Client</th>
+    <th>Subscription</th>
+    <th>Date</th>
+  </tr>
+  <tr *ngFor="let contract of contracts">
+    <td> {{contract.client}} </td>
+    <td> {{contract.subscription}} </td>
+    <td> {{contract.date | date: 'yyyy/MM/dd'}} </td>
+  </tr>
+</table>
+

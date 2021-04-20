@@ -70,9 +70,13 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         log.trace("updateSubscription - method entered: subscription={}", subscription);
 
         validator.validate(subscription);
-        subscriptionRepository.findById(subscription.getId()).orElseThrow(() -> new ServiceException("Entity does not exist"));
-
-        subscriptionRepository.updateSubscription(subscription.getType(), subscription.getPrice(), subscription.getDuration(), subscription.getId());
+        subscriptionRepository.findById(subscription.getId())
+                .ifPresentOrElse(newSubscription -> {
+                    newSubscription.setType(subscription.getType());
+                    newSubscription.setDuration(subscription.getDuration());
+                    newSubscription.setPrice(subscription.getPrice());
+                    log.debug("updateClient - updated: c={}", newSubscription);
+                }, () -> {throw new ServiceException("There is no subscription with this id");});
 
         log.trace("updateSubscription - method finished: subscription={}", subscription);
         return subscription;

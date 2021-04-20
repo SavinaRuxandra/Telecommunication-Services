@@ -55,7 +55,6 @@ public class ContractServiceImpl implements ContractService{
         log.trace("deleteContract - method finished");
     }
 
-
     @Override
     @Transactional
     public Contract updateContract(Contract contract) throws ServiceException {

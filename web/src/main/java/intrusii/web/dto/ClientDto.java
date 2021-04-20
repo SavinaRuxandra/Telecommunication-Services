@@ -7,6 +7,7 @@ import lombok.*;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
+@Builder
 public class ClientDto extends BaseDto {
     private String cnp;
     private String name;
