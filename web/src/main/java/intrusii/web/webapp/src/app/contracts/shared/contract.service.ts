@@ -18,4 +18,5 @@ export class ContractService {
     return this.httpClient
       .get<Array<Contract>>(this.contractsUrl);
   }
+
 }

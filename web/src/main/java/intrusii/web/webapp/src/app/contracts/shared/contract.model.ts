@@ -1,5 +1,8 @@
 export interface Contract {
-  client: number;
-  subscription: number;
+  id: number;
+  clientId: number;
+  clientName: string;
+  subscriptionId: number;
+  subscriptionType: string;
   date: Date
 }

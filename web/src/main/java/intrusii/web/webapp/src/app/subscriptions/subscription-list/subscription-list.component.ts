@@ -7,6 +7,7 @@ import {SubscriptionService} from "../shared/subscription.service";
   templateUrl: './subscription-list.component.html',
   styleUrls: ['./subscription-list.component.css']
 })
+
 export class SubscriptionListComponent implements OnInit {
 
   subscriptions?: Array<Subscription>

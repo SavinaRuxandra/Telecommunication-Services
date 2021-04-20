@@ -9,6 +9,7 @@ import {Observable} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
+
 export class SubscriptionService {
   private subscriptionUrl = 'http://localhost:8080/api/subscriptions';
 
@@ -17,5 +18,10 @@ export class SubscriptionService {
   getSubscriptions(): Observable<Subscription[]> {
     return this.httpClient
       .get<Array<Subscription>>(this.subscriptionUrl);
+  }
+
+  getSubscriptionById(id: number): Observable<Subscription> {
+    return this.httpClient
+      .post<Subscription>(this.subscriptionUrl + "/byId", id);
   }
 }

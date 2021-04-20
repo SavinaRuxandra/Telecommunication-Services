@@ -7,6 +7,7 @@ import { ClientService } from "../shared/client.service";
   templateUrl: './client-list.component.html',
   styleUrls: ['./client-list.component.css']
 })
+
 export class ClientListComponent implements OnInit {
 
   selectedClient?: Client;
@@ -16,6 +17,7 @@ export class ClientListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getClients();
+    console.log(this.clients);
   }
 
   onSelect(client: Client): void {
@@ -25,4 +27,5 @@ export class ClientListComponent implements OnInit {
   getClients(): void {
     this.clientService.getClients().subscribe(clients => this.clients = clients);
   }
+
 }

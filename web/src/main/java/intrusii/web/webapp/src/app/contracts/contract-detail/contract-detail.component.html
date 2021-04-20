@@ -1,0 +1,17 @@
+<div *ngIf="contract">
+  <h2> Details </h2>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Date</th>
+      <th>Client</th>
+      <th>Subscription</th>
+    </tr>
+    <tr>
+      <td> {{contract.id}} </td>
+      <td> {{contract.date | date: 'dd/MM/yyyy' }} </td>
+      <td> {{contract.clientName}} </td>
+      <td> {{contract.subscriptionType}} </td>
+    </tr>
+  </table>
+</div>

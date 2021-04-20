@@ -7,17 +7,23 @@ import {Contract} from "../shared/contract.model";
   templateUrl: './contract-list.component.html',
   styleUrls: ['./contract-list.component.css']
 })
+
 export class ContractListComponent implements OnInit {
 
-  contracts?: Array<Contract>
+  selectedContract!: Contract;
+  contracts!: Array<Contract>
 
   constructor(private contractService: ContractService) { }
 
   ngOnInit(): void {
-    this.getSubscriptions();
+    this.getContracts();
   }
 
-  getSubscriptions(): void {
+  onSelect(contract: Contract): void {
+    this.selectedContract = contract;
+  }
+
+  getContracts(): void {
     this.contractService.getContracts().subscribe(contracts => this.contracts = contracts);
   }
 

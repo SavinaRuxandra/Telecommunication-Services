@@ -1,7 +1,18 @@
 <div *ngIf="client">
-  <h2>{{client.name | uppercase}} </h2>
-  <div><span>id: </span>{{client.id}}</div>
-  <div><span>Client name: </span>{{client.name}}</div>
-  <div><span>Client email: </span>{{client.email}}</div>
-  <div><span>Client address: </span>{{client.address}}</div>
+  <h2> Details </h2>
+
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Address</th>
+    </tr>
+    <tr>
+      <td> {{client.id}} </td>
+      <td> {{client.name}} </td>
+      <td> {{client.email}} </td>
+      <td> {{client.address}} </td>
+    </tr>
+  </table>
 </div>

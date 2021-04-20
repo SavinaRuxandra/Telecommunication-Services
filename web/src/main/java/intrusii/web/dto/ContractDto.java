@@ -17,8 +17,10 @@ import java.time.LocalDate;
 @ToString(callSuper = true)
 @Builder
 public class ContractDto extends BaseDto {
-    private Long client;
-    private Long subscription;
+    private Long clientId;
+    private String clientName;
+    private Long subscriptionId;
+    private String subscriptionType;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)

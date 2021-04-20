@@ -13,6 +13,10 @@ import { SubscriptionsComponent } from './subscriptions/subscriptions.component'
 import { SubscriptionListComponent } from './subscriptions/subscription-list/subscription-list.component';
 import { ContractsComponent } from './contracts/contracts.component';
 import { ContractListComponent } from './contracts/contract-list/contract-list.component';
+import { ContractDetailComponent } from './contracts/contract-detail/contract-detail.component';
+import {ClientService} from "./clients/shared/client.service";
+import {SubscriptionService} from "./subscriptions/shared/subscription.service";
+import {ContractService} from "./contracts/shared/contract.service";
 
 @NgModule({
   declarations: [
@@ -24,6 +28,7 @@ import { ContractListComponent } from './contracts/contract-list/contract-list.c
     SubscriptionListComponent,
     ContractsComponent,
     ContractListComponent,
+    ContractDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +36,7 @@ import { ContractListComponent } from './contracts/contract-list/contract-list.c
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ClientService, SubscriptionService, ContractService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

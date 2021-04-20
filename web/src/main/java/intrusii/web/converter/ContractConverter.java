@@ -17,8 +17,8 @@ public class ContractConverter extends BaseConverter<Contract, ContractDto> {
     @Override
     public Contract convertDtoToModel(ContractDto dto) {
         Contract model = Contract.builder()
-                .client(clientService.getClientById(dto.getClient()))
-                .subscription(subscriptionService.getSubscriptionById(dto.getSubscription()))
+                .client(clientService.getClientById(dto.getClientId()))
+                .subscription(subscriptionService.getSubscriptionById(dto.getSubscriptionId()))
                 .date(dto.getDate())
                 .build();
         model.setDate(dto.getDate());
@@ -28,8 +28,10 @@ public class ContractConverter extends BaseConverter<Contract, ContractDto> {
     @Override
     public ContractDto convertModelToDto(Contract contract) {
         ContractDto dto = ContractDto.builder()
-                .client(contract.getClient().getId())
-                .subscription(contract.getSubscription().getId())
+                .clientId(contract.getClient().getId())
+                .clientName(contract.getClient().getName())
+                .subscriptionId(contract.getSubscription().getId())
+                .subscriptionType(contract.getSubscription().getType().label)
                 .date(contract.getDate())
                 .build();
         dto.setId(contract.getId());

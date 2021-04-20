@@ -1,15 +1,21 @@
 <h2 id = "title">Contracts</h2>
 
-<table>
+<table class = "contracts">
   <tr>
+    <th>ID</th>
     <th>Client</th>
     <th>Subscription</th>
     <th>Date</th>
   </tr>
-  <tr *ngFor="let contract of contracts">
-    <td> {{contract.client}} </td>
-    <td> {{contract.subscription}} </td>
-    <td> {{contract.date | date: 'yyyy/MM/dd'}} </td>
+  <tr *ngFor="let contract of contracts"
+      [class.selected]="contract === selectedContract"
+      (click)="onSelect(contract)">
+    <td> {{contract.id}} </td>
+    <td> {{contract.clientId}} </td>
+    <td> {{contract.subscriptionId}} </td>
+    <td> {{contract.date | date: 'dd/MM/yyyy'}} </td>
   </tr>
 </table>
+
+<app-contract-detail [contract] = "selectedContract"></app-contract-detail>
 
