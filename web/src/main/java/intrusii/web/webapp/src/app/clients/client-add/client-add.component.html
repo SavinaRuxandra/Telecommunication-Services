@@ -1,0 +1,75 @@
+
+<mat-card class="card">
+  <button class="button-back">
+    <a href="/clients"><mat-icon class = "icon-back">arrow_left</mat-icon></a>
+  </button>
+
+  <mat-card-header>
+    <mat-card-title>Client</mat-card-title>
+    <mat-card-subtitle>- add -</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+
+    <form [formGroup]="formGroup" (ngSubmit)="addClient()">
+
+      <hr color="#4CAF50">
+
+      <p>
+        <mat-form-field appearance="standard">
+          <mat-label>Cnp</mat-label>
+          <input matInput type="number" autocomplete="off" placeholder="Enter cnp" formControlName="cnp" required>
+          <mat-hint class="text-danger" *ngIf="formGroup.get('cnp').hasError('required') && formGroup.get('cnp').touched">
+            CNP is required
+          </mat-hint>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="standard">
+          <mat-label>Name</mat-label>
+            <input matInput type="text" autocomplete="off" placeholder="Enter name" formControlName="name" required/>
+            <mat-hint class="text-danger" *ngIf="formGroup.get('name').hasError('required') && formGroup.get('name').touched">
+              Email is required
+            </mat-hint>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="standard">
+          <mat-label>Email</mat-label>
+            <input matInput type="text" autocomplete="off" placeholder="Enter email" formControlName="email" required/>
+            <mat-hint class="text-danger" *ngIf="formGroup.get('email').hasError('required') && formGroup.get('email').touched">
+              Email is required
+            </mat-hint>
+            <mat-hint class="text-danger" *ngIf="formGroup.get('email').hasError('email') && formGroup.get('email').touched">
+              Email invalid
+            </mat-hint>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="standard">
+          <mat-label>Address</mat-label>
+            <input matInput type="text" autocomplete="off" placeholder="Enter address" formControlName="address" required/>
+            <mat-hint class="text-danger" *ngIf="formGroup.get('address').hasError('required') && formGroup.get('address').touched">
+              Address is required
+            </mat-hint>
+        </mat-form-field>
+      </p>
+
+      <mat-action-list>
+        <mat-card-actions align="end">
+          <button mat-button type="submit" [disabled]="!formGroup.valid" ><mat-icon aria-hidden="false">send</mat-icon></button>
+        </mat-card-actions>
+      </mat-action-list>
+
+    </form>
+
+    </mat-card-content>
+</mat-card>
+
+
+
+
+

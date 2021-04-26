@@ -1,11 +1,45 @@
-<h2 id = "title">Clients</h2>
-<ul class="clients">
-  <li *ngFor="let client of clients"
-      [class.selected]="client === selectedClient"
-      (click)="onSelect(client)">
-    <span class="badge"> {{client.id}}</span> {{client.name}}
-  </li>
-</ul>
 
-<app-client-detail [client] = "selectedClient"></app-client-detail>
+<div class = "container">
 
+  <div class = "mat-elevation-z9">
+    <table mat-table [dataSource]="dataSource" class = "clients" matSort>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef class="column" mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let client"> {{client.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cnp">
+        <th mat-header-cell *matHeaderCellDef class="column" mat-sort-header> CNP </th>
+        <td mat-cell *matCellDef="let client"> {{client.cnp}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef class="column" mat-sort-header> Address </th>
+        <td mat-cell *matCellDef="let client"> {{client.address}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef class="modify"> Modify </th>
+        <td mat-cell *matCellDef="let client">
+          <a class="action-button" routerLink="/clients/update" [state]="client"><mat-icon>edit</mat-icon></a>
+          <a class="action-button" (click)="openDialog(client.id)"><mat-icon>delete</mat-icon></a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['name', 'cnp', 'address', 'action']"></tr>
+      <tr mat-row *matRowDef="let client; columns: ['name', 'cnp', 'address', 'action']" [class.selected]="client === selectedClient" (click)="onSelect(client)"></tr>
+    </table>
+
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <a class="action-button" routerLink="/clients/add"><mat-icon class="icon">add</mat-icon></a>
+        <mat-paginator class="paginator" [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons></mat-paginator>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+  </div>
+
+  <app-client-detail [client] = "selectedClient"></app-client-detail>
+
+</div>

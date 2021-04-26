@@ -1,51 +1,95 @@
-.clients {
-  margin: 0 0 2em 0;
-  list-style-type: none;
-  padding: 0;
-  width: 20em;
+table {
+  border-collapse: collapse;
+  width: 100%;
 }
-.clients li {
-  cursor: pointer;
-  position: relative;
-  left: 0;
-  background-color: #EEE;
-  margin: .5em;
-  padding: .3em 0;
-  height: 1.6em;
-  border-radius: 4px;
+
+.container {
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+  width: auto
 }
-.clients li:hover {
+
+mat-toolbar-row {
+  justify-content: space-between;
+}
+
+.paginator {
+  background-color: rgb(245,245,245);
+}
+
+.mat-column-select {
+  overflow: initial;
+}
+
+.modify {
+  width: 6%;
+}
+
+.column {
+  width: 31%
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #4caf50;
+  color: white;
+  font-size: 15px;
+}
+
+.clients, tr, td {
+  border-color: #4caf50;
+}
+
+/*tr:nth-child(even){background-color: #f2f2f2}*/
+
+.clients tr:hover {
   color: #2c3a41;
   background-color: #e6e6e6;
   left: .1em;
+  cursor: pointer;
 }
-.clients li.selected {
-  background-color: #aeaeae;
+
+.clients tr.selected {
+  background-color: #d0d0d0;
   color: white;
 }
-.clients li.selected:hover {
-  background-color: #a9a9a9;
+
+.clients tr.selected:hover {
+  background-color: #cacaca;
   color: white;
 }
-.clients li.selected:active {
-  background-color: #a0a0a0;
-  color: white;
+
+mat-toolbar-row {
+  margin-left: 10px;
 }
-.clients .badge {
+
+.action-button {
   display: inline-block;
-  font-size: small;
-  color: white;
-  padding: 0.8em 0.7em 0 0.7em;
+  padding: 3px 3px;
+  margin-right: 3px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  color: #fff;
   background-color: #4caf50;
-  line-height: 1em;
-  position: relative;
-  left: -1px;
-  top: -4px;
-  height: 1.8em;
-  margin-right: .8em;
-  border-radius: 4px 0 0 4px;
+  border-radius: 12px;
+}
+
+.action-button:hover {
+  background-color: #3e8e41
+}
+
+.icon{
+  padding-top: 3px;
 }
 
 input {
   padding: .5rem;
 }
+
+
