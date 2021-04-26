@@ -3,15 +3,42 @@ table {
   width: 100%;
 }
 
+/*.container {*/
+/*  margin-top: 15px;*/
+/*}*/
+
 th, td {
   text-align: left;
   padding: 8px;
 }
 
-tr:nth-child(even){background-color: #f2f2f2}
-
 th {
   background-color: #4caf50;
+  color: white;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+.subscriptions tr {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  margin: .5em;
+  padding: .3em 0;
+  height: 1.6em;
+  border-radius: 4px;
+}
+.subscriptions tr:hover {
+  color: #2c3a41;
+  background-color: #e6e6e6;
+  left: .1em;
+}
+.subscriptions tr.selected {
+  background-color: #d0d0d0;
+  color: white;
+}
+.subscriptions tr.selected:hover {
+  background-color: #cacaca;
   color: white;
 }
 

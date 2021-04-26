@@ -1,9 +1,17 @@
-<script src="clients/clients.component.ts"></script><h1 id="title">{{title}}</h1>
 
-<nav>
-  <a routerLink="/clients" routerLinkActive="active">Clients</a>
-  <a routerLink="/subscriptions" routerLinkActive="active">Subscriptions</a>
-  <a routerLink="/contracts" routerLinkActive="active">Contracts</a>
+<script src="clients/clients.component.ts"></script>
+
+<h1 id="title">{{title}}</h1>
+
+<nav mat-tab-nav-bar>
+  <a mat-tab-link
+     routerLink="/clients" routerLinkActive="active">Clients
+  </a>
+  <a mat-tab-link
+     routerLink="/subscriptions" routerLinkActive="active">Subscriptions
+  </a>
+  <a mat-tab-link
+     routerLink="/contracts" routerLinkActive="active">Contracts
+  </a>
 </nav>
-
 <router-outlet></router-outlet>

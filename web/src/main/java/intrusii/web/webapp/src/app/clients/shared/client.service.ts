@@ -20,6 +20,23 @@ export class ClientService {
       .get<Array<Client>>(this.clientsUrl);
   }
 
+  addClient(client: Client): Observable<Client> {
+    return this.httpClient
+      .post<Client>(this.clientsUrl, client);
+  }
+
+  deleteClient(id: number): Observable<Client> {
+    const urlDelete = `${this.clientsUrl}/${id}`;
+    return this.httpClient
+      .delete<Client>(urlDelete);
+  }
+
+  updateClient(client: Client): Observable<Client> {
+    const urlUpdate = `${this.clientsUrl}/${client.id}`;
+    return this.httpClient
+      .put<Client>(urlUpdate, client);
+  }
+
   getClientById(id: number): Observable<Client> {
     return this.httpClient
       .post<Client>(this.clientsUrl + "/byId", id);
