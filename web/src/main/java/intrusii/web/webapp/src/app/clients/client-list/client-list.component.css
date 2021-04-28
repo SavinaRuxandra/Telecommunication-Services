@@ -23,7 +23,7 @@ mat-toolbar-row {
 }
 
 .modify {
-  width: 6%;
+  width: 7%;
 }
 
 .column {
@@ -86,6 +86,12 @@ mat-toolbar-row {
 
 .icon{
   padding-top: 3px;
+}
+
+.search-bar {
+  display: block;
+  width: 200px;
+  margin-left: auto;
 }
 
 input {

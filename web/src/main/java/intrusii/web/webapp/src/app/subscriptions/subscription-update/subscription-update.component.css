@@ -7,6 +7,14 @@ mat-card{
   border-radius: 5px;
 }
 
+/*mat-card-actions{*/
+/*  margin-right: 30px;*/
+/*}*/
+
+/*a{*/
+/*  color: black;*/
+/*}*/
+
 mat-card-header {
   display: block;
   width: 100%;

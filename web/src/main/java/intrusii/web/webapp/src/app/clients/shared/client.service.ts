@@ -15,11 +15,6 @@ export class ClientService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getClients(): Observable<Client[]> {
-    return this.httpClient
-      .get<Array<Client>>(this.clientsUrl);
-  }
-
   addClient(client: Client): Observable<Client> {
     return this.httpClient
       .post<Client>(this.clientsUrl, client);
@@ -35,6 +30,11 @@ export class ClientService {
     const urlUpdate = `${this.clientsUrl}/${client.id}`;
     return this.httpClient
       .put<Client>(urlUpdate, client);
+  }
+
+  getClients(): Observable<Client[]> {
+    return this.httpClient
+      .get<Array<Client>>(this.clientsUrl);
   }
 
   getClientById(id: number): Observable<Client> {

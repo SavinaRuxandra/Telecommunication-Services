@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {Subscription} from "../shared/subscription.model";
-import {SubscriptionService} from "../shared/subscription.service";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { SubscriptionService } from "../shared/subscription.service";
+import { MatTableDataSource } from "@angular/material/table";
+import { MatPaginator } from "@angular/material/paginator";
+import {MatSort, Sort} from "@angular/material/sort";
+import { MatDialog } from "@angular/material/dialog";
+import { SubscriptionDeleteComponent } from "../subscription-delete/subscription-delete.component";
+import { FormControl } from "@angular/forms";
 
 @Component({
   selector: 'app-subscription-list',
@@ -10,16 +15,87 @@ import {SubscriptionService} from "../shared/subscription.service";
 
 export class SubscriptionListComponent implements OnInit {
 
-  subscriptions?: Array<Subscription>
+  formSearch = new FormControl();
+  dataSource = new MatTableDataSource();
 
-  constructor(private subscriptionService: SubscriptionService) { }
+  selectedFiled = 'Type';
+  searchFields: string[] = ['Type', 'Duration', 'Price']
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator
+
+  constructor(private subscriptionService: SubscriptionService,
+              public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getSubscriptions();
+    this.setDataSource();
+    this.filterElements();
   }
 
-  getSubscriptions(): void {
-    this.subscriptionService.getSubscriptions().subscribe(subscriptions => this.subscriptions = subscriptions);
+  setDataSource(): void {
+    this.subscriptionService.getSubscriptions()
+      .subscribe(subscriptions => {
+        this.dataSource.data = subscriptions;
+        this.dataSource.paginator = this.paginator;
+
+      });
+  }
+
+  filterElements(): void {
+    setTimeout(() => this.formSearch.valueChanges.subscribe(string => {
+        if(string.length > 0)
+          switch (this.selectedFiled) {
+            case "Type":
+              this.subscriptionService.filterSubscriptionsByType(string).subscribe(subscriptions => this.dataSource.data = subscriptions);
+              break;
+
+            case "Duration":
+              this.subscriptionService.filterSubscriptionsByDuration(string).subscribe(subscriptions => this.dataSource.data = subscriptions);
+              break;
+
+            case "Price":
+              this.subscriptionService.filterSubscriptionsByPrice(string).subscribe(subscriptions => this.dataSource.data = subscriptions);
+              break;
+          }
+        else
+          this.subscriptionService.getSubscriptions().subscribe(subscriptions => this.dataSource.data = subscriptions);
+      })
+    );
+  }
+
+  sortData(sort: Sort) {
+    if (!sort.active || sort.direction === '') {
+      return;
+    }
+
+    switch (sort.active) {
+      case 'type':
+        this.subscriptionService.sortSubscriptionsByType(sort.direction)
+          .subscribe(subscriptions => {
+            console.log(subscriptions);
+            this.dataSource.data = subscriptions;
+          });
+        break;
+      case 'duration':
+        this.subscriptionService.sortSubscriptionsByDuration(sort.direction)
+          .subscribe(subscriptions => {
+            this.dataSource.data = subscriptions;
+          });
+        break;
+      case 'price':
+        this.subscriptionService.sortSubscriptionsByPrice(sort.direction)
+          .subscribe(subscriptions => {
+            this.dataSource.data = subscriptions;
+          });
+        break;
+      default:
+        return;
+    }
+  }
+
+  openDeleteDialog(id: number) {
+    this.dialog.open(SubscriptionDeleteComponent, {
+      data:{id: id}
+    });
   }
 
 }

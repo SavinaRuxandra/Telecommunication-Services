@@ -70,6 +70,36 @@ public class SubscriptionController {
         return new ArrayList<>(subscriptionConverter.convertModelsToDtos(subscriptions));
     }
 
+    @RequestMapping(value="/sortByType/{isAsc}")
+    List<SubscriptionDto> sortSubscriptionsByType(@PathVariable String isAsc) {
+        log.trace("sortSubscriptionsByType - method entered");
+
+        List<Subscription> subscriptions = subscriptionService.sortSubscriptionsByType(isAsc);
+
+        log.trace("sortSubscriptionsByType - method finished: subscriptions={}", subscriptions);
+        return subscriptionConverter.convertModelsToDtos(subscriptions);
+    }
+
+    @RequestMapping(value="/sortByDuration/{isAsc}")
+    List<SubscriptionDto> sortSubscriptionsByDuration(@PathVariable String isAsc) {
+        log.trace("sortSubscriptionsByDuration - method entered");
+
+        List<Subscription> subscriptions = subscriptionService.sortSubscriptionsByDuration(isAsc);
+
+        log.trace("sortSubscriptionsByDuration - method finished: subscriptions={}", subscriptions);
+        return subscriptionConverter.convertModelsToDtos(subscriptions);
+    }
+
+    @RequestMapping(value="/sortByPrice/{isAsc}")
+    List<SubscriptionDto> sortSubscriptionsByPrice(@PathVariable String isAsc) {
+        log.trace("sortSubscriptionsByPrice - method entered");
+
+        List<Subscription> subscriptions = subscriptionService.sortSubscriptionsByPrice(isAsc);
+
+        log.trace("sortSubscriptionsByPrice - method finished: subscriptions={}", subscriptions);
+        return subscriptionConverter.convertModelsToDtos(subscriptions);
+    }
+
     @RequestMapping(value = "/byId", method = RequestMethod.POST)
     SubscriptionDto getSubscriptionById(@RequestBody Long id) {
         log.trace("getSubscriptionById - method entered: id={}", id);
@@ -81,23 +111,47 @@ public class SubscriptionController {
         return subscription;
     }
 
-    @RequestMapping(value = "/filterByDuration", method = RequestMethod.POST)
-    List<SubscriptionDto> filterSubscriptionByDuration(@RequestBody int duration) {
+    @RequestMapping(value = "/filterByType/{type}")
+    List<SubscriptionDto> filterSubscriptionByType(@PathVariable String type) {
+        log.trace("filterSubscriptionByType - method entered");
+
+        List<Subscription> subscriptions = new ArrayList<>();
+        if(type.equals("Internet") || type.equals("TV") || type.equals("Phone")) {
+            subscriptions = subscriptionService.filterSubscriptionByType(SubscriptionType.valueOf(type));
+        }
+
+        log.trace("filterSubscriptionByType - method finished: subscriptions={}", subscriptions);
+        return new ArrayList<>(subscriptionConverter.convertModelsToDtos(subscriptions));
+    }
+
+    @RequestMapping(value = "/filterByDuration/{duration}")
+    List<SubscriptionDto> filterSubscriptionByDuration(@PathVariable String duration) {
         log.trace("filterSubscriptionByDuration - method entered");
 
-        List<Subscription> subscriptions = subscriptionService.filterSubscriptionByDuration(duration);
+        List<Subscription> subscriptions;
+        try{
+            subscriptions = subscriptionService.filterSubscriptionByDuration(Integer.parseInt(duration));
+        }catch (NumberFormatException ex) {
+            subscriptions = new ArrayList<>();
+        }
 
         log.trace("filterSubscriptionByDuration - method finished: subscriptions={}", subscriptions);
         return new ArrayList<>(subscriptionConverter.convertModelsToDtos(subscriptions));
     }
 
-    @RequestMapping(value = "/filterByType", method = RequestMethod.POST)
-    List<SubscriptionDto> filterSubscriptionByType(@RequestBody SubscriptionType type) {
-        log.trace("filterSubscriptionByType - method entered");
+    @RequestMapping(value = "/filterByPrice/{price}")
+    List<SubscriptionDto> filterSubscriptionByPrice(@PathVariable String price) {
+        log.trace("filterSubscriptionByPrice - method entered");
 
-        List<Subscription> subscriptions = subscriptionService.filterSubscriptionByType(type);
+        List<Subscription> subscriptions;
+        try{
+            subscriptions = subscriptionService.filterSubscriptionByPrice(Float.parseFloat(price));
+            System.out.println(price);
+        }catch (NumberFormatException ex) {
+            subscriptions = new ArrayList<>();
+        }
 
-        log.trace("filterSubscriptionByType - method finished: subscriptions={}", subscriptions);
+        log.trace("filterSubscriptionByPrice - method finished: subscriptions={}", subscriptions);
         return new ArrayList<>(subscriptionConverter.convertModelsToDtos(subscriptions));
     }
 }
