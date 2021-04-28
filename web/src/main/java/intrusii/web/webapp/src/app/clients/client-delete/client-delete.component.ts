@@ -1,9 +1,7 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import {ClientService} from "../shared/client.service";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {ClientAddComponent} from "../client-add/client-add.component";
-import {Client} from "../shared/client.model";
-import {Router} from "@angular/router";
+import { Component, Inject, OnInit } from '@angular/core';
+import { ClientService } from "../shared/client.service";
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { Client } from "../shared/client.model";
 
 @Component({
   selector: 'app-client-delete',
@@ -14,15 +12,12 @@ export class ClientDeleteComponent implements OnInit {
 
 
   constructor(private clientService: ClientService,
-              private dialogRef: MatDialogRef<ClientAddComponent>,
-              @Inject(MAT_DIALOG_DATA) private data: Client,
-              private router: Router) { }
+              @Inject(MAT_DIALOG_DATA) private data: Client) { }
 
   ngOnInit(): void {
   }
 
   deleteClient(): void {
-    this.clientService.deleteClient(this.data.id);
-    location.reload();
+    this.clientService.deleteClient(this.data.id).subscribe(() => location.reload());
   }
 }

@@ -1,0 +1,70 @@
+
+<mat-card class="card">
+  <button class="button-back">
+    <a href="/subscriptions"><mat-icon class = "icon-back">arrow_left</mat-icon></a>
+  </button>
+
+  <mat-card-header>
+    <mat-card-title>Subscription</mat-card-title>
+    <mat-card-subtitle>- add -</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+
+    <form (ngSubmit)="addSubscription()" #formGroup="ngForm">
+
+      <hr color="4caf50">
+
+      <div class="form-group">
+        <label for="type">Type</label>
+        <input type="text" class="form-control ng-untouched ng-pristine ng-valid" id="type"
+               required
+               autocomplete="off"
+               [(ngModel)]="subscription.type" name="type"
+               #type = "ngModel">
+
+        <div class = "error" [hidden]="type.valid || type.pristine">
+          Type is required
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="duration">Duration</label>
+        <input type="text"  class="form-control ng-untouched ng-pristine ng-valid" id="duration"
+               required
+               autocomplete="off"
+               [(ngModel)]="subscription.duration" name="duration"
+               #duration = "ngModel">
+
+        <div class = "error" [hidden]="duration.valid || duration.pristine">
+          Duration is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input type="text"  class="form-control ng-untouched ng-pristine ng-valid" id="price"
+               required
+               autocomplete="off"
+               [(ngModel)]="subscription.price" name="price"
+               #price = "ngModel">
+
+        <div class = "error" [hidden]="price.valid || price.pristine">
+          Price is required
+        </div>
+      </div>
+
+      <div align="end">
+        <button type="submit" [disabled]="!formGroup.form.valid"><mat-icon>send</mat-icon></button>
+      </div>
+
+    </form>
+
+  </mat-card-content>
+</mat-card>
+
+
+
+
+

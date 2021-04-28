@@ -39,13 +39,13 @@ export class ClientAddComponent implements OnInit {
   }
 
   addClient(): void {
-    const client = <Client>{cnp:this.formGroup.controls["cnp"].value,
+    const client = <Client>{
+      cnp:this.formGroup.controls["cnp"].value,
       name:this.formGroup.controls["name"].value,
       email:this.formGroup.controls["email"].value,
       address:this.formGroup.controls["address"].value
     }
-    this.clientService.addClient(client).subscribe(client => {
-      this.client = client;
+    this.clientService.addClient(client).subscribe(() => {
       this.router.navigate(['/clients']);
     });
   }

@@ -12,8 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 @Service
@@ -92,6 +95,39 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         return StreamSupport.stream(subscriptions.spliterator(), false).collect(Collectors.toList());
     }
 
+    public List<Subscription> sortSubscriptionsByType(String isAsc) {
+        log.trace("sortSubscriptionsByType - method entered");
+
+        List<Subscription> subscriptions = subscriptionRepository.findAll().stream().sorted(Comparator.comparing(Subscription::getType)).collect(Collectors.toList());
+        if(isAsc.equals("desc"))
+            Collections.reverse(subscriptions);
+
+        log.trace("sortSubscriptionsByType - method finished: subscriptions={}", subscriptions);
+        return subscriptions;
+    }
+
+    public List<Subscription> sortSubscriptionsByDuration(String isAsc) {
+        log.trace("sortSubscriptionsByDuration - method entered");
+
+        List<Subscription> subscriptions = subscriptionRepository.findAll().stream().sorted(Comparator.comparing(Subscription::getDuration)).collect(Collectors.toList());
+        if(isAsc.equals("desc"))
+            Collections.reverse(subscriptions);
+
+        log.trace("sortSubscriptionsByDuration - method finished: subscriptions={}", subscriptions);
+        return subscriptions;
+    }
+
+    public List<Subscription> sortSubscriptionsByPrice(String isAsc) {
+        log.trace("sortSubscriptionsByPrice - method entered");
+
+        List<Subscription> subscriptions = subscriptionRepository.findAll().stream().sorted(Comparator.comparing(Subscription::getPrice)).collect(Collectors.toList());
+        if(isAsc.equals("desc"))
+            Collections.reverse(subscriptions);
+
+        log.trace("sortSubscriptionsByPrice - method finished: subscriptions={}", subscriptions);
+        return subscriptions;
+    }
+
     @Override
     public Subscription getSubscriptionById(Long id) throws ServiceException {
         log.trace("getSubscriptionById - method entered: id={}", id);
@@ -107,6 +143,16 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
+    public List<Subscription> filterSubscriptionByType(SubscriptionType type){
+        log.trace("filterSubscriptionByType - method entered: type={}", type);
+
+        List<Subscription> subscriptions = subscriptionRepository.findAllByType(type);
+
+        log.trace("filterSubscriptionByType - method finished: subscriptions={}", subscriptions);
+        return subscriptions;
+    }
+
+    @Override
     public List<Subscription> filterSubscriptionByDuration(int duration){
         log.trace("filterSubscriptionByDuration - method entered: duration={}", duration);
 
@@ -117,12 +163,12 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public List<Subscription> filterSubscriptionByType(SubscriptionType type){
-        log.trace("filterSubscriptionByType - method entered: type={}", type);
+    public List<Subscription> filterSubscriptionByPrice(float price){
+        log.trace("filterSubscriptionByPrice - method entered: price={}", price);
 
-        List<Subscription> subscriptions = subscriptionRepository.findAllByType(type);
+        List<Subscription> subscriptions = subscriptionRepository.findAllByPrice(price);
 
-        log.trace("filterSubscriptionByType - method finished: subscriptions={}", subscriptions);
+        log.trace("filterSubscriptionByPrice - method finished: price={}", subscriptions);
         return subscriptions;
     }
 }

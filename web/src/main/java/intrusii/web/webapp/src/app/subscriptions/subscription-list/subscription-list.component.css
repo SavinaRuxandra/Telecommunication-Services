@@ -3,9 +3,32 @@ table {
   width: 100%;
 }
 
-/*.container {*/
-/*  margin-top: 15px;*/
-/*}*/
+.container {
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+  width: auto
+}
+
+mat-toolbar-row {
+  justify-content: space-between;
+}
+
+.paginator {
+  background-color: rgb(245,245,245);
+}
+
+.mat-column-select {
+  overflow: initial;
+}
+
+.modify {
+  width: 7%;
+}
+
+.column {
+  width: 31%
+}
 
 th, td {
   text-align: left;
@@ -15,33 +38,82 @@ th, td {
 th {
   background-color: #4caf50;
   color: white;
+  font-size: 15px;
 }
 
-tr:nth-child(even){background-color: #f2f2f2}
+.subscriptions, tr, td {
+  border-color: #4caf50;
+}
 
-.subscriptions tr {
+/*tr:nth-child(even){background-color: #f2f2f2}*/
+
+/*.subscriptions tr:hover {*/
+/*  color: #2c3a41;*/
+/*  background-color: #e6e6e6;*/
+/*  left: .1em;*/
+/*  cursor: pointer;*/
+/*}*/
+
+/*.subscriptions tr.selected {*/
+/*  background-color: #d0d0d0;*/
+/*  color: white;*/
+/*}*/
+
+/*.subscriptions tr.selected:hover {*/
+/*  background-color: #cacaca;*/
+/*  color: white;*/
+/*}*/
+
+mat-toolbar-row {
+  margin-left: 10px;
+}
+
+.action-button {
+  display: inline-block;
+  padding: 3px 3px;
+  margin-right: 3px;
+  font-size: 24px;
   cursor: pointer;
-  position: relative;
-  left: 0;
-  margin: .5em;
-  padding: .3em 0;
-  height: 1.6em;
-  border-radius: 4px;
+  text-align: center;
+  color: #fff;
+  background-color: #4caf50;
+  border-radius: 12px;
 }
-.subscriptions tr:hover {
-  color: #2c3a41;
-  background-color: #e6e6e6;
-  left: .1em;
+
+.action-button:hover {
+  background-color: #3e8e41
 }
-.subscriptions tr.selected {
-  background-color: #d0d0d0;
-  color: white;
+
+.icon{
+  padding-top: 3px;
 }
-.subscriptions tr.selected:hover {
-  background-color: #cacaca;
-  color: white;
+
+.search-bar {
+  display: block;
+  width: 200px;
+  float: right;
+  margin-left: auto;
+
+}
+
+.search {
+  height: 72px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+mat-radio-group {
+  display: block;
+  float: right;
+}
+
+mat-radio-button {
+  margin-right: 20px;
 }
 
 input {
   padding: .5rem;
 }
+
+

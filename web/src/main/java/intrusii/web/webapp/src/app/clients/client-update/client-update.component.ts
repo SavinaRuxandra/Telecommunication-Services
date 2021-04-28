@@ -13,9 +13,11 @@ import {Client} from "../shared/client.model";
 export class ClientUpdateComponent implements OnInit {
 
   formGroup!: FormGroup;
-  id: number;
 
-  constructor(private clientService: ClientService, private activatedRoute: ActivatedRoute, private router: Router, private formBuilder: FormBuilder) { }
+  constructor(private clientService: ClientService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
@@ -35,7 +37,7 @@ export class ClientUpdateComponent implements OnInit {
     });
   }
 
-  updateClient(){
+  updateClient() {
     const client = <Client>{
       id:this.formGroup.get("id").value,
       cnp:this.formGroup.get("cnp").value,
@@ -44,7 +46,8 @@ export class ClientUpdateComponent implements OnInit {
       address:this.formGroup.get("address").value
     }
 
-    this.clientService.updateClient(client).subscribe(() => this.router.navigate(['/clients']));
+    this.clientService.updateClient(client)
+      .subscribe(() => this.router.navigate(['/clients']));
   }
 
 }

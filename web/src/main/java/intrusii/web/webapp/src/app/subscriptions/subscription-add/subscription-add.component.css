@@ -1,3 +1,4 @@
+@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
 mat-card{
   margin: 20px auto;
   border: 10px #4caf50;
@@ -19,12 +20,17 @@ mat-card-title{
   text-align: center;
 }
 
+hr {
+  height: 2px;
+}
+
 button{
   width: 60px;
   height: 40px;
   border-radius: 5px;
   background: transparent;
   border: 1px solid #1F2233;
+  /*padding-top: 5px;*/
 }
 
 button:hover{
@@ -45,3 +51,16 @@ button:active{
   padding-left: 2px;
 }
 
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+
+.error {
+  color: red;
+  margin-left: 8px;
+  margin-top: 5px;
+}

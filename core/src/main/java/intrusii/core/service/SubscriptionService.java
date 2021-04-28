@@ -15,9 +15,17 @@ public interface SubscriptionService {
 
     List<Subscription> getAllSubscriptions();
 
+    List<Subscription> sortSubscriptionsByType(String isAsc);
+
+    List<Subscription> sortSubscriptionsByDuration(String isAsc);
+
+    List<Subscription> sortSubscriptionsByPrice(String isAsc);
+
     Subscription getSubscriptionById(Long id);
+
+    List<Subscription> filterSubscriptionByType(SubscriptionType type);
 
     List<Subscription> filterSubscriptionByDuration(int duration);
 
-    List<Subscription> filterSubscriptionByType(SubscriptionType type);
+    List<Subscription> filterSubscriptionByPrice(float price);
 }

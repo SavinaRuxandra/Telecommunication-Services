@@ -32,6 +32,10 @@ import { MatListModule } from "@angular/material/list";
 import { ClientDeleteComponent } from './clients/client-delete/client-delete.component';
 import { MatDialogModule } from "@angular/material/dialog";
 import { ClientUpdateComponent } from './clients/client-update/client-update.component';
+import { SubscriptionDeleteComponent } from './subscriptions/subscription-delete/subscription-delete.component';
+import { SubscriptionAddComponent } from './subscriptions/subscription-add/subscription-add.component';
+import { SubscriptionUpdateComponent } from './subscriptions/subscription-update/subscription-update.component';
+import {MatRadioGroup, MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
   declarations: [
@@ -47,6 +51,9 @@ import { ClientUpdateComponent } from './clients/client-update/client-update.com
     ClientAddComponent,
     ClientDeleteComponent,
     ClientUpdateComponent,
+    SubscriptionDeleteComponent,
+    SubscriptionAddComponent,
+    SubscriptionUpdateComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +73,7 @@ import { ClientUpdateComponent } from './clients/client-update/client-update.com
     MatTabsModule,
     MatListModule,
     MatDialogModule,
+    MatRadioModule,
   ],
   providers: [ClientService, SubscriptionService, ContractService],
   bootstrap: [AppComponent]

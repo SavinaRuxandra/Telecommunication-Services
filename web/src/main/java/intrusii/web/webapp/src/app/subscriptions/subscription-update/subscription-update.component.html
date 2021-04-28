@@ -1,0 +1,64 @@
+
+<mat-card class="card">
+  <button class="button-back">
+    <a href="/subscriptions"><mat-icon class = "icon-back">arrow_left</mat-icon></a>
+  </button>
+
+  <mat-card-header>
+    <mat-card-title>Subscription</mat-card-title>
+    <mat-card-subtitle>- update -</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+
+    <form [formGroup]="formGroup" (ngSubmit)="updateSubscription()">
+
+      <hr color="#4CAF50">
+
+      <p>
+        <mat-form-field appearance="standard">
+          <mat-label>ID</mat-label>
+          <input matInput type="number" autocomplete="off" formControlName="id">
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="standard">
+          <mat-label>Type</mat-label>
+          <input matInput type="text" autocomplete="off" placeholder="Enter type" formControlName="type" required>
+          <mat-hint class="text-danger" *ngIf="formGroup.get('type').hasError('required') && formGroup.get('type').touched">
+            Type is required
+          </mat-hint>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="standard">
+          <mat-label>Duration</mat-label>
+          <input matInput type="number" autocomplete="off" placeholder="Enter duration" formControlName="duration" required/>
+          <mat-hint class="text-danger" *ngIf="formGroup.get('duration').hasError('required') && formGroup.get('duration').touched">
+            Duration is required
+          </mat-hint>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="standard">
+          <mat-label>Price</mat-label>
+          <input matInput type="number" autocomplete="off" placeholder="Enter price" formControlName="price" required/>
+          <mat-hint class="text-danger" *ngIf="formGroup.get('price').hasError('required') && formGroup.get('price').touched">
+            Price is required
+          </mat-hint>
+        </mat-form-field>
+      </p>
+
+      <mat-action-list>
+        <mat-card-actions align="end">
+          <button mat-button type="submit" [disabled]="!formGroup.valid" ><mat-icon aria-hidden="false">send</mat-icon></button>
+        </mat-card-actions>
+      </mat-action-list>
+
+    </form>
+
+  </mat-card-content>
+</mat-card>

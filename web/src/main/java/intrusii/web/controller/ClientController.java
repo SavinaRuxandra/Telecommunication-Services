@@ -66,7 +66,7 @@ public class ClientController {
         List<Client> clients = clientService.getAllClients();
 
         log.trace("getAllClients - method finished: clients={}", clients);
-        return new ArrayList<>(clientConverter.convertModelsToDtos(clients));
+        return clientConverter.convertModelsToDtos(clients);
     }
 
     @RequestMapping(value = "/byId", method = RequestMethod.POST)
@@ -87,7 +87,7 @@ public class ClientController {
         List<Client> clients = clientService.filterClientsByName(name);
 
         log.trace("filterClientByDuration - method finished: clients={}", clients);
-        return new ArrayList<>(clientConverter.convertModelsToDtos(clients));
+        return clientConverter.convertModelsToDtos(clients);
     }
 
     @RequestMapping(value = "/filterByCnp", method = RequestMethod.POST)
@@ -97,6 +97,6 @@ public class ClientController {
         List<Client> clients = clientService.filterClientsByCnp(cnp);
 
         log.trace("filterClientByType - method finished: clients={}", clients);
-        return new ArrayList<>(clientConverter.convertModelsToDtos(clients));
+        return clientConverter.convertModelsToDtos(clients);
     }
 }

@@ -12,6 +12,7 @@ import java.util.List;
 @org.springframework.stereotype.Repository
 public interface SubscriptionRepository extends Repository<Subscription, Long> {
 
-    List<Subscription> findAllByDuration(int duration);
     List<Subscription> findAllByType(SubscriptionType type);
+    List<Subscription> findAllByDuration(int duration);
+    List<Subscription> findAllByPrice(float price);
 }
