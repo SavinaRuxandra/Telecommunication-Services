@@ -64,6 +64,8 @@ public class ContractServiceImpl implements ContractService{
         clientRepository.findById(contract.getClient().getId()).orElseThrow(() -> new ServiceException("There is no client with this id"));
 
         oldContract.setClient(contract.getClient());
+        oldContract.setAddress(contract.getAddress());
+        oldContract.setDate(contract.getDate());
 
         log.debug("updateContract - updated: c={}", oldContract);
         log.trace("updateContract - method finished");

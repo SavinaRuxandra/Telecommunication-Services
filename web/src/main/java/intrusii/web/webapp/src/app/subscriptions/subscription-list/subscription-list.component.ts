@@ -2,15 +2,25 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SubscriptionService } from "../shared/subscription.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
-import {MatSort, Sort} from "@angular/material/sort";
+import { Sort} from "@angular/material/sort";
 import { MatDialog } from "@angular/material/dialog";
 import { SubscriptionDeleteComponent } from "../subscription-delete/subscription-delete.component";
 import { FormControl } from "@angular/forms";
+import { MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions } from '@angular/material/tooltip';
+
+export const myCustomTooltipDefaults: MatTooltipDefaultOptions = {
+  showDelay: 1000,
+  hideDelay: 500,
+  touchendHideDelay: 1000,
+};
 
 @Component({
   selector: 'app-subscription-list',
   templateUrl: './subscription-list.component.html',
-  styleUrls: ['./subscription-list.component.css']
+  styleUrls: ['./subscription-list.component.css'],
+  providers: [
+    {provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: myCustomTooltipDefaults}
+  ],
 })
 
 export class SubscriptionListComponent implements OnInit {

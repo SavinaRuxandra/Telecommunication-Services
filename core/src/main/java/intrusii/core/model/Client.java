@@ -12,17 +12,16 @@ import javax.persistence.Entity;
 @ToString(callSuper = true)
 @Builder
 public class Client extends BaseEntity<Long> {
-    private String cnp;
+    private IDCard idCard;
     private String name;
     private String email;
-    private String address;
 
-    public String getCnp() {
-        return cnp;
+    public IDCard getIDCard() {
+        return idCard;
     }
 
-    public void setCnp(String cnp) {
-        this.cnp = cnp;
+    public void setIDCard(IDCard idCard) {
+        this.idCard = idCard;
     }
 
     public String getName() {
@@ -39,16 +38,6 @@ public class Client extends BaseEntity<Long> {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getAddress()
-    {
-        return address;
-    }
-
-    public void setAddress(String address)
-    {
-        this.address=address;
     }
 
 }

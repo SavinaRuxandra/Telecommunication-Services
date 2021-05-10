@@ -53,18 +53,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
         subscriptionRepository.findById(id).orElseThrow(() -> new ServiceException("Entity does not exist"));
 
-        deleteContractBySubscriptionID(id);
         subscriptionRepository.deleteById(id);
 
         log.trace("deleteSubscription - method finished");
-    }
-
-    private void deleteContractBySubscriptionID(Long id) {
-        log.trace("deleteContractBySubscriptionID - method entered: id={}", id);
-
-        contractRepository.findAll().stream().filter(contract -> contract.getSubscription().getId().equals(id)).forEach(contract -> contractRepository.deleteById(contract.getId()));
-
-        log.trace("deleteContractBySubscriptionID - method finished");
     }
 
     @Override

@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClientsComponent } from './clients/clients.component';
-import { ClientDetailComponent } from './clients/client-detail/client-detail.component';
 import { HttpClientModule } from "@angular/common/http";
 import { ClientListComponent } from './clients/client-list/client-list.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
@@ -35,13 +34,20 @@ import { ClientUpdateComponent } from './clients/client-update/client-update.com
 import { SubscriptionDeleteComponent } from './subscriptions/subscription-delete/subscription-delete.component';
 import { SubscriptionAddComponent } from './subscriptions/subscription-add/subscription-add.component';
 import { SubscriptionUpdateComponent } from './subscriptions/subscription-update/subscription-update.component';
-import {MatRadioGroup, MatRadioModule} from "@angular/material/radio";
+import { MatRadioModule} from "@angular/material/radio";
+import { ContractDeleteComponent } from './contracts/contract-delete/contract-delete.component';
+import { ContractAddComponent } from './contracts/contract-add/contract-add.component';
+import { ContractUpdateComponent } from './contracts/contract-update/contract-update.component';
+import { SubscriptionDetailComponent } from './subscriptions/subscription-detail/subscription-detail.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import { IdCardDetailComponent } from './idCards/id-card-detail/id-card-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClientsComponent,
-    ClientDetailComponent,
     ClientListComponent,
     SubscriptionsComponent,
     SubscriptionListComponent,
@@ -54,6 +60,11 @@ import {MatRadioGroup, MatRadioModule} from "@angular/material/radio";
     SubscriptionDeleteComponent,
     SubscriptionAddComponent,
     SubscriptionUpdateComponent,
+    ContractDeleteComponent,
+    ContractAddComponent,
+    ContractUpdateComponent,
+    SubscriptionDetailComponent,
+    IdCardDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,6 +85,9 @@ import {MatRadioGroup, MatRadioModule} from "@angular/material/radio";
     MatListModule,
     MatDialogModule,
     MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTooltipModule
   ],
   providers: [ClientService, SubscriptionService, ContractService],
   bootstrap: [AppComponent]

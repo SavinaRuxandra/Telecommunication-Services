@@ -7,17 +7,26 @@ import { MatTableDataSource } from "@angular/material/table";
 import { MatDialog } from "@angular/material/dialog";
 import { ClientDeleteComponent } from "../client-delete/client-delete.component";
 import { FormControl } from "@angular/forms";
+import { MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions } from '@angular/material/tooltip';
+
+export const myCustomTooltipDefaults: MatTooltipDefaultOptions = {
+  showDelay: 1000,
+  hideDelay: 500,
+  touchendHideDelay: 1000,
+};
 
 @Component({
   selector: 'app-client-list',
   templateUrl: './client-list.component.html',
-  styleUrls: ['./client-list.component.css']
+  styleUrls: ['./client-list.component.css'],
+  providers: [
+    {provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: myCustomTooltipDefaults}
+  ],
 })
 
 export class ClientListComponent implements OnInit {
 
   formFilter = new FormControl();
-  selectedClient!: Client;
   dataSource = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator
@@ -40,10 +49,6 @@ export class ClientListComponent implements OnInit {
         this.dataSource.sort = this.sort;
         this.dataSource.filter = "";
       });
-  }
-
-  onSelect(client: Client): void {
-    this.selectedClient = client;
   }
 
   openDeleteDialog(id: number) {

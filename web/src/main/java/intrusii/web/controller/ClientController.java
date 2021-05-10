@@ -27,15 +27,21 @@ public class ClientController {
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     ClientDto addClient(@RequestBody ClientDto clientDto){
-        log.trace("addClient - method entered: client={}", clientDto);
+        try
+        {
+            log.trace("addClient - method entered: client={}", clientDto);
 
-        var client = clientConverter.convertDtoToModel(clientDto);
-        var result = clientService.addClient(client);
-        var resultModel = clientConverter.convertModelToDto(result);
+            var client = clientConverter.convertDtoToModel(clientDto);
+            var result = clientService.addClient(client);
+            var resultModel = clientConverter.convertModelToDto(result);
 
-        log.trace("updateClient - method finished : subscription={}", result);
-        return resultModel;
+            log.trace("addClient - method finished : client={}", result);
+            return resultModel;
+        } catch (Exception ex){
+            throw new RuntimeException("The client has not been added");
+        }
     }
+
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     ResponseEntity<?> deleteClient(@PathVariable Long id) {
@@ -49,13 +55,13 @@ public class ClientController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     ClientDto updateClient(@PathVariable Long id, @RequestBody ClientDto dto) {
-        log.trace("updateClient - method entered: subscription={}", dto);
+        log.trace("updateClient - method entered: client={}", dto);
 
         ClientDto clientDto = clientConverter.convertModelToDto(
                 clientService.updateClient(
                         clientConverter.convertDtoToModel(dto)));
 
-        log.trace("updateClient - method finished: subscription={}", clientDto);
+        log.trace("updateClient - method finished: client={}", clientDto);
         return clientDto;
     }
 

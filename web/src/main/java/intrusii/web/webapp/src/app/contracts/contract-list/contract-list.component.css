@@ -3,9 +3,37 @@ table {
   width: 100%;
 }
 
-/*.container {*/
-/*  margin-top: 15px;*/
-/*}*/
+.container {
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+  width: auto
+}
+
+mat-toolbar-row {
+  justify-content: space-between;
+}
+
+.paginator {
+  background-color: rgb(245,245,245);
+  margin-left: auto;
+}
+
+.mat-column-select {
+  overflow: initial;
+}
+
+.id {
+  width: 5%;
+}
+
+.modify {
+  width: 10%;
+}
+
+.column {
+  width: 21.25%
+}
 
 th, td {
   text-align: left;
@@ -15,33 +43,68 @@ th, td {
 th {
   background-color: #4caf50;
   color: white;
+  font-size: 15px;
 }
 
-tr:nth-child(even){background-color: #f2f2f2}
-
-.contracts tr {
-  cursor: pointer;
-  position: relative;
-  left: 0;
-  margin: .5em;
-  padding: .3em 0;
-  height: 1.6em;
-  border-radius: 4px;
+.contracts, tr, td {
+  border-color: #4caf50;
 }
+
+/*tr:nth-child(even){background-color: #f2f2f2}*/
+
 .contracts tr:hover {
   color: #2c3a41;
   background-color: #e6e6e6;
   left: .1em;
+  cursor: pointer;
 }
+
 .contracts tr.selected {
   background-color: #d0d0d0;
   color: white;
 }
+
 .contracts tr.selected:hover {
   background-color: #cacaca;
   color: white;
 }
 
+mat-toolbar-row {
+  margin-left: 10px;
+}
+
+.action-button {
+  display: inline-block;
+  padding: 3px 3px;
+  margin-right: 3px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  color: #fff;
+  background-color: #4caf50;
+  border-radius: 12px;
+}
+
+.add-button {
+  margin-left: -5px;
+}
+
+.action-button:hover {
+  background-color: #3e8e41
+}
+
+.icon{
+  padding-top: 3px;
+}
+
+.search-bar {
+  display: block;
+  width: 200px;
+  margin-left: auto;
+}
+
 input {
   padding: .5rem;
 }
+
+

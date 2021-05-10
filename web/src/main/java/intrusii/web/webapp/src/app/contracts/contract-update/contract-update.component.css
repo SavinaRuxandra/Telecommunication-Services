@@ -2,10 +2,18 @@ mat-card{
   margin: 20px auto;
   border: 10px #4caf50;
   position: relative;
-  width: 500px;
+  width: 350px;
   border-top: 7px solid #4caf50;
   border-radius: 5px;
 }
+
+/*mat-card-actions{*/
+/*  margin-right: 30px;*/
+/*}*/
+
+/*a{*/
+/*  color: black;*/
+/*}*/
 
 mat-card-header {
   display: block;
@@ -45,7 +53,3 @@ button:active{
   padding-left: 2px;
 }
 
-mat-form-field {
-  width: 40%;
-  margin: 0 5%;
-}

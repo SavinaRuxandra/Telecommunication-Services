@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {map} from "rxjs/operators";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Client} from "../shared/client.model";
+import {IDCard} from "../../idCards/shared/idCard.model";
 
 @Component({
   selector: 'app-client-update',
@@ -21,29 +22,47 @@ export class ClientUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
-      id:  [{value: 'id', disabled:true}],
-      cnp: new FormControl('', [Validators.required]),
+      id:  [{value: 'id', disabled: true}],
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      address: new FormControl('', [Validators.required])
+      cnp: new FormControl('', [Validators.required]),
+      nationality: new FormControl('', [Validators.required]),
+      placeOfBirth: new FormControl(''),
+      residence: new FormControl(''),
+      sex: new FormControl(''),
+      series: new FormControl('', [Validators.required]),
+      number: new FormControl('', [Validators.required])
     })
 
-    this.activatedRoute.paramMap.pipe(map(() => window.history.state)).subscribe(client => {
+    this.activatedRoute.paramMap.pipe(map(() => window.history.state))
+      .subscribe(client => {
       this.formGroup.get("id").setValue(client.id);
-      this.formGroup.controls["cnp"].setValue(client.cnp);
       this.formGroup.controls["name"].setValue(client.name);
       this.formGroup.controls["email"].setValue(client.email);
-      this.formGroup.controls["address"].setValue(client.address);
+      this.formGroup.controls["cnp"].setValue(client.idCard.cnp);
+      this.formGroup.controls["nationality"].setValue(client.idCard.nationality);
+      this.formGroup.controls["placeOfBirth"].setValue(client.idCard.placeOfBirth);
+      this.formGroup.controls["residence"].setValue(client.idCard.residence);
+      this.formGroup.controls["sex"].setValue(client.idCard.sex);
+      this.formGroup.controls["series"].setValue(client.idCard.series);
+      this.formGroup.controls["number"].setValue(client.idCard.number);
     });
   }
 
   updateClient() {
     const client = <Client>{
       id:this.formGroup.get("id").value,
-      cnp:this.formGroup.get("cnp").value,
+      idCard: <IDCard>{
+        cnp: this.formGroup.controls["cnp"].value,
+        nationality: this.formGroup.controls["nationality"].value,
+        placeOfBirth: this.formGroup.controls["placeOfBirth"].value,
+        residence: this.formGroup.controls["residence"].value,
+        sex: this.formGroup.controls["sex"].value,
+        series: this.formGroup.controls["series"].value,
+        number: this.formGroup.controls["number"].value
+      },
       name:this.formGroup.get("name").value,
       email:this.formGroup.get("email").value,
-      address:this.formGroup.get("address").value
     }
 
     this.clientService.updateClient(client)

@@ -8,5 +8,5 @@ import java.util.List;
 public interface ClientRepository extends Repository<Client, Long> {
 
     List<Client> findByNameContaining(String name);
-    List<Client> findByCnp(String cnp);
+    List<Client> findByIdCard_Cnp(String cnp);
 }

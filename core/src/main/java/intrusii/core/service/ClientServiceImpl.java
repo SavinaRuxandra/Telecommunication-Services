@@ -50,7 +50,6 @@ public class ClientServiceImpl implements ClientService {
 
         clientRepository.findById(id).orElseThrow(() -> new ServiceException("Entity does not exist"));
 
-        deleteContractByClientId(id);
         clientRepository.deleteById(id);
 
         log.trace("deleteClient - method finished");
@@ -64,10 +63,9 @@ public class ClientServiceImpl implements ClientService {
         validator.validate(client);
         clientRepository.findById(client.getId())
                 .ifPresentOrElse(newClient -> {
-                    newClient.setCnp(client.getCnp());
+                    newClient.setIDCard(client.getIDCard());
                     newClient.setName(client.getName());
                     newClient.setEmail(client.getEmail());
-                    newClient.setAddress(client.getAddress());
                     log.debug("updateClient - updated: c={}", newClient);
                 }, () -> {throw new ServiceException("There is no client with this id");});
         log.trace("updateClient - method finished");
@@ -97,14 +95,6 @@ public class ClientServiceImpl implements ClientService {
         return client;
     }
 
-    private void deleteContractByClientId(Long id) {
-        log.trace("deleteContractByClientID - method entered: id={}", id);
-
-        contractRepository.findAll().stream().filter(contract -> contract.getClient().getId().equals(id)).forEach(contract -> contractRepository.deleteById(contract.getId()));
-
-        log.trace("deleteContractByClientID - method finished");
-    }
-
     @Override
     public List<Client> filterClientsByName(String name) {
         log.trace("filterClientsByName - method entered: name={}", name);
@@ -119,7 +109,7 @@ public class ClientServiceImpl implements ClientService {
     public List<Client> filterClientsByCnp(String cnp) {
         log.trace("filterClientsByCnp - method entered: cnp={}", cnp);
 
-        List<Client> clients = clientRepository.findByCnp(cnp);
+        List<Client> clients = clientRepository.findByIdCard_Cnp(cnp);
 
         log.trace("filterClientsByCnp - method finished: clients={}", clients);
         return clients;

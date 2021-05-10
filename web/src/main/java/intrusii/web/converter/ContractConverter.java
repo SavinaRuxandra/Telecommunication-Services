@@ -9,29 +9,30 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ContractConverter extends BaseConverter<Contract, ContractDto> {
+
     @Autowired
-    private ClientService clientService;
+    private ClientConverter clientConverter;
     @Autowired
-    private SubscriptionService subscriptionService;
+    private SubscriptionConverter subscriptionConverter;
 
     @Override
     public Contract convertDtoToModel(ContractDto dto) {
         Contract model = Contract.builder()
-                .client(clientService.getClientById(dto.getClientId()))
-                .subscription(subscriptionService.getSubscriptionById(dto.getSubscriptionId()))
+                .client(clientConverter.convertDtoToModel(dto.getClient()))
+                .subscription(subscriptionConverter.convertDtoToModel(dto.getSubscription()))
+                .address(dto.getAddress())
                 .date(dto.getDate())
                 .build();
-        model.setDate(dto.getDate());
+        model.setId(dto.getId());
         return model;
     }
 
     @Override
     public ContractDto convertModelToDto(Contract contract) {
         ContractDto dto = ContractDto.builder()
-                .clientId(contract.getClient().getId())
-                .clientName(contract.getClient().getName())
-                .subscriptionId(contract.getSubscription().getId())
-                .subscriptionType(contract.getSubscription().getType().label)
+                .client(clientConverter.convertModelToDto(contract.getClient()))
+                .subscription(subscriptionConverter.convertModelToDto(contract.getSubscription()))
+                .address(contract.getAddress())
                 .date(contract.getDate())
                 .build();
         dto.setId(contract.getId());

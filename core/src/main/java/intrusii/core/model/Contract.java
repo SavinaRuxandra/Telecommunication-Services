@@ -2,9 +2,7 @@ package intrusii.core.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -15,17 +13,19 @@ import java.time.LocalDate;
 @ToString(callSuper = true)
 @Builder
 public class Contract extends BaseEntity<Long> {
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name="clientId")
     private Client client;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name="subscriptionId")
     private Subscription subscription;
+    private String address;
     private LocalDate date;
 
     public Contract(Client client){
         this.client = client;
         this.subscription = null;
+        this.address = "";
         this.date = LocalDate.of(2000, 1, 1);
     }
 
@@ -43,6 +43,15 @@ public class Contract extends BaseEntity<Long> {
 
     public void setSubscription(Subscription subscription) {
         this.subscription = subscription;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address)
+    {
+        this.address=address;
     }
 
     public LocalDate getDate() {

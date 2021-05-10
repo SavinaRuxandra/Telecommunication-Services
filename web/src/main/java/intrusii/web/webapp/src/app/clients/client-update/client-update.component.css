@@ -53,3 +53,7 @@ button:active{
   padding-left: 2px;
 }
 
+mat-form-field {
+  width: 40%;
+  margin: 0 5%;
+}
