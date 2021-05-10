@@ -17,7 +17,7 @@ public class ClientValidator implements Validator<Client> {
     @Override
     public void validate(Client entity) throws ValidatorException {
         try {
-            Long.parseLong(entity.getCnp());
+            Long.parseLong(entity.getIDCard().getCnp());
         } catch (NumberFormatException e) {
             throw new ValidatorException("Invalid CNP");
         }

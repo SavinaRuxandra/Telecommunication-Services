@@ -14,6 +14,23 @@ export class ContractService {
 
   constructor(private httpClient: HttpClient) { }
 
+  addContract(contract: Contract): Observable<Contract> {
+    return this.httpClient
+      .post<Contract>(this.contractsUrl, contract);
+  }
+
+  deleteContract(id: number): Observable<Contract> {
+    const urlDelete = `${this.contractsUrl}/${id}`;
+    return this.httpClient
+      .delete<Contract>(urlDelete);
+  }
+
+  updateContract(contract: Contract): Observable<Contract> {
+    const urlUpdate = `${this.contractsUrl}/${contract.id}`;
+    return this.httpClient
+      .put<Contract>(urlUpdate, contract);
+  }
+
   getContracts(): Observable<Contract[]> {
     return this.httpClient
       .get<Array<Contract>>(this.contractsUrl);

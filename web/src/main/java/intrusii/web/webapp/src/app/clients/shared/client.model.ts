@@ -1,7 +1,8 @@
+import {IDCard} from "../../idCards/shared/idCard.model";
+
 export interface Client {
   id: number;
-  cnp: string;
+  idCard: IDCard;
   name: string;
   email: string;
-  address: string;
 }

@@ -16,6 +16,7 @@ mat-toolbar-row {
 
 .paginator {
   background-color: rgb(245,245,245);
+  margin-left: auto;
 }
 
 .mat-column-select {
@@ -23,11 +24,11 @@ mat-toolbar-row {
 }
 
 .modify {
-  width: 7%;
+  width: 10%;
 }
 
 .column {
-  width: 31%
+  width: 28.33%
 }
 
 th, td {
@@ -47,22 +48,11 @@ th {
 
 /*tr:nth-child(even){background-color: #f2f2f2}*/
 
-/*.subscriptions tr:hover {*/
-/*  color: #2c3a41;*/
-/*  background-color: #e6e6e6;*/
-/*  left: .1em;*/
-/*  cursor: pointer;*/
-/*}*/
-
-/*.subscriptions tr.selected {*/
-/*  background-color: #d0d0d0;*/
-/*  color: white;*/
-/*}*/
-
-/*.subscriptions tr.selected:hover {*/
-/*  background-color: #cacaca;*/
-/*  color: white;*/
-/*}*/
+.subscriptions tr:hover {
+  color: #2c3a41;
+  background-color: #e6e6e6;
+  left: .1em;
+}
 
 mat-toolbar-row {
   margin-left: 10px;
@@ -80,11 +70,15 @@ mat-toolbar-row {
   border-radius: 12px;
 }
 
+.add-button {
+  margin-left: -5px;
+}
+
 .action-button:hover {
   background-color: #3e8e41
 }
 
-.icon{
+.icon {
   padding-top: 3px;
 }
 
@@ -110,6 +104,11 @@ mat-radio-group {
 
 mat-radio-button {
   margin-right: 20px;
+}
+
+/deep/ .tooltip {
+  background-color: #4CAF50;
+  color: black;
 }
 
 input {

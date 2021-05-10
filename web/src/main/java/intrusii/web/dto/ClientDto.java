@@ -9,8 +9,7 @@ import lombok.*;
 @ToString(callSuper = true)
 @Builder
 public class ClientDto extends BaseDto {
-    private String cnp;
+    private IDCardDto idCard;
     private String name;
     private String email;
-    private String address;
 }

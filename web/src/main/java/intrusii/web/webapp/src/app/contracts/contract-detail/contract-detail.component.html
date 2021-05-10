@@ -3,15 +3,29 @@
   <table>
     <tr>
       <th>ID</th>
+      <th>Address</th>
       <th>Date</th>
-      <th>Client</th>
-      <th>Subscription</th>
+      <th>Client ID</th>
+      <th>Client Name</th>
+      <th>Client CNP</th>
+      <th>Client Email</th>
+      <th>Subscription ID</th>
+      <th>Subscription Type</th>
+      <th>Subscription Duration</th>
+      <th>Subscription Price</th>
     </tr>
     <tr>
       <td> {{contract.id}} </td>
+      <td> {{contract.address}} </td>
       <td> {{contract.date | date: 'dd/MM/yyyy' }} </td>
-      <td> {{contract.clientName}} </td>
-      <td> {{contract.subscriptionType}} </td>
+      <td> {{contract.client.id}} </td>
+      <td> {{contract.client.name}} </td>
+      <td> {{contract.client.idCard.cnp}} </td>
+      <td> {{contract.client.email}} </td>
+      <td> {{contract.subscription.id}} </td>
+      <td> {{contract.subscription.type}} </td>
+      <td> {{contract.subscription.duration}} </td>
+      <td> {{contract.subscription.price}} </td>
     </tr>
   </table>
 </div>

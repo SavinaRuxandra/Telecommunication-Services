@@ -16,18 +16,23 @@ mat-toolbar-row {
 
 .paginator {
   background-color: rgb(245,245,245);
+  margin-left: auto;
 }
 
 .mat-column-select {
   overflow: initial;
 }
 
+.id {
+  width: 5%;
+}
+
 .modify {
-  width: 7%;
+  width: 10%;
 }
 
 .column {
-  width: 31%
+  width: 28.33%
 }
 
 th, td {
@@ -51,17 +56,6 @@ th {
   color: #2c3a41;
   background-color: #e6e6e6;
   left: .1em;
-  cursor: pointer;
-}
-
-.clients tr.selected {
-  background-color: #d0d0d0;
-  color: white;
-}
-
-.clients tr.selected:hover {
-  background-color: #cacaca;
-  color: white;
 }
 
 mat-toolbar-row {
@@ -80,6 +74,10 @@ mat-toolbar-row {
   border-radius: 12px;
 }
 
+.add-button {
+  margin-left: -5px;
+}
+
 .action-button:hover {
   background-color: #3e8e41
 }
@@ -92,6 +90,11 @@ mat-toolbar-row {
   display: block;
   width: 200px;
   margin-left: auto;
+}
+
+/deep/ .tooltip {
+  background-color: #4CAF50;
+  color: black;
 }
 
 input {

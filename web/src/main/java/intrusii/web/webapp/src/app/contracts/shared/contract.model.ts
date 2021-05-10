@@ -1,8 +1,10 @@
+import {Client} from "../../clients/shared/client.model";
+import {Subscription} from "../../subscriptions/shared/subscription.model";
+
 export interface Contract {
   id: number;
-  clientId: number;
-  clientName: string;
-  subscriptionId: number;
-  subscriptionType: string;
+  client: Client;
+  subscription: Subscription;
+  address: string
   date: Date
 }
