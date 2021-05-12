@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {SubscriptionService} from "../shared/subscription.service";
 import {map} from "rxjs/operators";
 import {Subscription} from "../shared/subscription.model";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-subscription-update',
@@ -17,7 +18,8 @@ export class SubscriptionUpdateComponent implements OnInit {
   constructor(private subscriptionService: SubscriptionService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private snack : MatSnackBar) { }
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
@@ -44,7 +46,8 @@ export class SubscriptionUpdateComponent implements OnInit {
     }
 
     this.subscriptionService.updateSubscription(subscription)
-      .subscribe(() => this.router.navigate(['/subscriptions']));
+      .subscribe(() => this.router.navigate(['/subscriptions'])
+        .then(() => this.snack.open("Subscription successfully added", "x", {duration: 4000})))
   }
 
 }

@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Subscription} from "../shared/subscription.model";
 import {SubscriptionService} from "../shared/subscription.service";
 import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-subscription-add',
@@ -13,7 +14,8 @@ export class SubscriptionAddComponent implements OnInit {
   subscription: Subscription = new Subscription;
 
   constructor(private subscriptionService: SubscriptionService,
-              private router: Router) { }
+              private router: Router,
+              private snack : MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -24,8 +26,10 @@ export class SubscriptionAddComponent implements OnInit {
       duration:this.subscription.duration,
       price:this.subscription.price
     }
-    this.subscriptionService.addSubscription(subscription).subscribe(() => {
-      this.router.navigate(['/subscriptions']);
+    this.subscriptionService.addSubscription(subscription)
+      .subscribe(() => {
+        this.router.navigate(['/subscriptions'])
+          .then(() => this.snack.open("Subscription successfully added", "x", {duration: 4000}))
     })
   }
 

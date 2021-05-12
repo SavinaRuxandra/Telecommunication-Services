@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {ClientService} from "../shared/client.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {map} from "rxjs/operators";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Client} from "../shared/client.model";
-import {IDCard} from "../../idCards/shared/idCard.model";
+import { Component, OnInit } from '@angular/core';
+import { ClientService } from "../shared/client.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { map } from "rxjs/operators";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { Client } from "../shared/client.model";
+import { IDCard } from "../../idCards/shared/idCard.model";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-client-update',
@@ -18,7 +19,8 @@ export class ClientUpdateComponent implements OnInit {
   constructor(private clientService: ClientService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private snack : MatSnackBar) { }
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
@@ -66,7 +68,8 @@ export class ClientUpdateComponent implements OnInit {
     }
 
     this.clientService.updateClient(client)
-      .subscribe(() => this.router.navigate(['/clients']));
+      .subscribe(() => this.router.navigate(['/clients'])
+        .then(() => this.snack.open("Client successfully updated", "x", {duration: 4000})));
   }
 
 }

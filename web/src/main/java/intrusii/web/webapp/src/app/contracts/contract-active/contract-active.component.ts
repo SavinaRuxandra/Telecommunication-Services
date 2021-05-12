@@ -1,30 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ContractService } from "../shared/contract.service";
 import { Contract } from "../shared/contract.model";
-import { FormControl } from "@angular/forms";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
-import { MatDialog } from "@angular/material/dialog";
-import { ContractDeleteComponent } from "../contract-delete/contract-delete.component";
-import { MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions } from "@angular/material/tooltip";
-
-export const myCustomTooltipDefaults: MatTooltipDefaultOptions = {
-  showDelay: 1000,
-  hideDelay: 500,
-  touchendHideDelay: 1000,
-};
+import { ContractService } from "../shared/contract.service";
+import { FormControl } from "@angular/forms";
 
 @Component({
-  selector: 'app-contract-list',
-  templateUrl: './contract-list.component.html',
-  styleUrls: ['./contract-list.component.css'],
-  providers: [
-    {provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: myCustomTooltipDefaults}
-  ],
+  selector: 'app-contract-active-contracts',
+  templateUrl: './contract-active.component.html',
+  styleUrls: ['./contract-active.component.css']
 })
-
-export class ContractListComponent implements OnInit {
+export class ContractActiveComponent implements OnInit {
 
   formFilter = new FormControl();
   selectedContract!: Contract;
@@ -33,17 +20,16 @@ export class ContractListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private contractService: ContractService,
-              public dialog: MatDialog) { }
+  constructor(private contractService: ContractService) {
+  }
 
   ngOnInit(): void {
-    this.getContracts();
-
+    this.getFilteredContracts();
     setTimeout(() => this.formFilter.valueChanges.subscribe(string => this.dataSource.filter = string));
   }
 
-  getContracts(): void {
-    this.contractService.getContracts()
+  getFilteredContracts(): void {
+    this.contractService.filterActiveContracts()
       .subscribe(contracts => {
         this.dataSource.data = contracts;
         this.dataSource.paginator = this.paginator;
@@ -58,10 +44,5 @@ export class ContractListComponent implements OnInit {
   onSelect(contract: Contract): void {
     this.selectedContract = contract;
   }
-
-  openDeleteDialog(id: number) {
-    this.dialog.open(ContractDeleteComponent, {
-      data:{id: id}
-    });
-  }
 }
+

@@ -7,6 +7,7 @@ import intrusii.web.dto.ContractDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -63,10 +64,11 @@ public class ContractController {
     List<ContractDto> getAllContracts() {
         log.trace("getAllContracts - method entered");
 
-        List<Contract> contracts = contractService.getAllContracts();
+        List<ContractDto> contractsDto = contractConverter.convertModelsToDtos(
+                contractService.getAllContracts());
 
-        log.trace("getAllContracts - method finished: contracts={}", contracts);
-        return new ArrayList<>(contractConverter.convertModelsToDtos(contracts));
+        log.trace("getAllContracts - method finished: contracts={}", contractsDto);
+        return contractsDto;
     }
 
     @RequestMapping(value = "/byId", method = RequestMethod.POST)
@@ -84,9 +86,20 @@ public class ContractController {
     List<ContractDto> filterActiveContracts() {
         log.trace("filterActiveContracts - method entered");
 
-        List<Contract> contracts = contractService.filterActiveContracts();
+        List<ContractDto> contractsDto = contractConverter.convertModelsToDtos(
+                contractService.filterActiveContracts());
 
-        log.trace("filterActiveContracts - method finished: contracts={}", contracts);
-        return new ArrayList<>(contractConverter.convertModelsToDtos(contracts));
+        log.trace("filterActiveContracts - method finished: contracts={}", contractsDto);
+        return contractsDto;
+    }
+
+    @RequestMapping(value = "/statistics")
+    List<Pair<String, Integer>> getStatistics() {
+        log.trace("getStatistics - method entered");
+
+        List<Pair<String, Integer>> pairs = contractService.getStatistics();
+
+        log.trace("getStatistics - method finished: pairs={}", pairs);
+        return pairs;
     }
 }

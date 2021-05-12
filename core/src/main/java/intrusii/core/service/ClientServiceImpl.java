@@ -1,6 +1,7 @@
 package intrusii.core.service;
 
 import intrusii.core.model.Client;
+import intrusii.core.model.Contract;
 import intrusii.core.model.validators.ClientValidator;
 import intrusii.core.model.validators.ValidatorException;
 import intrusii.core.repository.ClientRepository;
@@ -22,9 +23,6 @@ public class ClientServiceImpl implements ClientService {
 
     @Autowired
     private ClientRepository clientRepository;
-
-    @Autowired
-    private ContractRepository contractRepository;
 
     @Autowired
     private ClientValidator validator;
@@ -68,6 +66,7 @@ public class ClientServiceImpl implements ClientService {
                     newClient.setEmail(client.getEmail());
                     log.debug("updateClient - updated: c={}", newClient);
                 }, () -> {throw new ServiceException("There is no client with this id");});
+
         log.trace("updateClient - method finished");
         return client;
     }
@@ -90,9 +89,20 @@ public class ClientServiceImpl implements ClientService {
         }
 
         Client client = clientRepository.findById(id).orElseThrow(() -> new ServiceException("There is no client with this id"));
-        log.trace("getClientByID - method finished: client={}", client);
 
+        log.trace("getClientByID - method finished: client={}", client);
         return client;
+    }
+
+    @Override
+    public List<Contract> getContractsOfClient(Long id) {
+        log.trace("getContractsOfClient - method entered: id={}", id);
+
+        Client client = clientRepository.findById(id).orElseThrow(() -> new ServiceException("There is no client with this id"));
+        List<Contract> contracts = client.getContracts();
+
+        log.trace("getContractsOfClient - method finished: contracts={}", contracts);
+        return contracts;
     }
 
     @Override
@@ -100,8 +110,8 @@ public class ClientServiceImpl implements ClientService {
         log.trace("filterClientsByName - method entered: name={}", name);
 
         List<Client> clients = clientRepository.findByNameContaining(name);
-        log.trace("filterClientsByName - method finished: clients={}", clients);
 
+        log.trace("filterClientsByName - method finished: clients={}", clients);
         return clients;
     }
 

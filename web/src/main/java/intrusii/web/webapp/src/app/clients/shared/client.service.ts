@@ -5,6 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import {Client} from "./client.model";
 
 import {Observable} from "rxjs";
+import {Contract} from "../../contracts/shared/contract.model";
 
 @Injectable({
   providedIn: 'root'
@@ -37,8 +38,8 @@ export class ClientService {
       .get<Array<Client>>(this.clientsUrl);
   }
 
-  getClientById(id: number): Observable<Client> {
+  getContractsOfClient(id: number): Observable<Contract[]> {
     return this.httpClient
-      .post<Client>(this.clientsUrl + "/byId", id);
+      .get<Array<Contract>>(`${this.clientsUrl}/contracts/${id}`);
   }
 }

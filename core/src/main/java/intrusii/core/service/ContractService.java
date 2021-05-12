@@ -1,6 +1,7 @@
 package intrusii.core.service;
 
 import intrusii.core.model.Contract;
+import org.springframework.data.util.Pair;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface ContractService {
     Contract getContractById(Long id);
 
     List<Contract> filterActiveContracts();
+
+    List<Pair<String, Integer>> getStatistics();
 }

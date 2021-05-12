@@ -24,15 +24,19 @@ button{
   height: 40px;
   border-radius: 5px;
   background: transparent;
-  border: 1px solid #1F2233;
+  border: 1px solid;
 }
 
 button:hover{
   background-color: #4caf50;
 }
 
-button:active{
+button:active {
   background-color: #3e8e41;
+}
+
+a:active {
+  color: #000000;
 }
 
 .button-back{

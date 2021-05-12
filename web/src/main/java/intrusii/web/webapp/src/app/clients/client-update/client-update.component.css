@@ -39,8 +39,8 @@ button:hover{
   background-color: #4caf50;
 }
 
-button:active{
-  background-color: #3e8e41;
+a:active {
+  color: #000000;
 }
 
 .button-back{

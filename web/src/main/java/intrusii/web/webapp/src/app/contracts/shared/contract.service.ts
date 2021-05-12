@@ -5,6 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import {Contract} from "./contract.model";
 
 import {Observable} from "rxjs";
+import {Pair} from "./pair.model";
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,16 @@ export class ContractService {
   getContracts(): Observable<Contract[]> {
     return this.httpClient
       .get<Array<Contract>>(this.contractsUrl);
+  }
+
+  filterActiveContracts(): Observable<Contract[]> {
+    return this.httpClient
+      .get<Array<Contract>>(`${this.contractsUrl}/filterActive`);
+  }
+
+  getStatistics(): Observable<Pair[]> {
+    return this.httpClient
+      .get<Array<Pair>>(`${this.contractsUrl}/statistics`)
   }
 
 }
