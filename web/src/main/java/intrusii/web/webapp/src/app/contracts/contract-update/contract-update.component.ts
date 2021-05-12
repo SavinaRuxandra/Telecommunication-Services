@@ -7,6 +7,7 @@ import { Contract } from "../shared/contract.model";
 import { Client } from "../../clients/shared/client.model";
 import { Subscription } from "../../subscriptions/shared/subscription.model";
 import {formatDate} from "@angular/common";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-contract-update',
@@ -20,7 +21,8 @@ export class ContractUpdateComponent implements OnInit {
   constructor(private contractService: ContractService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private snack : MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -61,7 +63,8 @@ export class ContractUpdateComponent implements OnInit {
     }
 
     this.contractService.updateContract(contract)
-      .subscribe(() => this.router.navigate(['/contracts']));
+      .subscribe(() => this.router.navigate(['/contracts'])
+        .then(() => this.snack.open("Contract successfully updated", "x", {duration: 4000})));
   }
 
 }

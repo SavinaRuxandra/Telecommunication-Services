@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { formatDate } from "@angular/common";
 import { Client } from "../../clients/shared/client.model";
 import { Subscription } from "../../subscriptions/shared/subscription.model";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-contract-add',
@@ -19,7 +20,8 @@ export class ContractAddComponent implements OnInit {
 
   constructor(private contractService: ContractService,
               private formBuilder: FormBuilder,
-              private router: Router) { }
+              private router: Router,
+              private snack : MatSnackBar) { }
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
@@ -43,9 +45,8 @@ export class ContractAddComponent implements OnInit {
     }
 
     this.contractService.addContract(contract)
-      .subscribe(
-        () => this.router.navigate(['/contracts'])
-      );
+      .subscribe(() => this.router.navigate(['/contracts'])
+        .then(() => this.snack.open("Contract successfully added", "x", {duration: 4000})));
   }
 
 }

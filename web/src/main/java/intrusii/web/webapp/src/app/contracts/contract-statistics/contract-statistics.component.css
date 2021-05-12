@@ -1,22 +1,7 @@
-mat-card{
-  margin: 20px auto;
-  border: 10px #4caf50;
-  position: relative;
-  width: 350px;
-  border-top: 7px solid #4caf50;
-  border-radius: 5px;
-}
-
-mat-card-header {
+.baseChart {
+  margin: auto;
   display: block;
-  width: 100%;
-  text-align: center;
-}
-
-mat-card-title{
-  display: block;
-  width: 100%;
-  text-align: center;
+  width: 50%;
 }
 
 button{
@@ -39,13 +24,24 @@ a:active {
   color: #000000;
 }
 
-.button-back {
+button {
   width: 30px;
   height: 30px;
   border-radius: 20px;
   background: transparent;
   border: 1px solid #1F2233;
-  margin: 0 0 20px;
+  margin: 20px;
   padding-left: 2px;
 }
 
+
+a {
+  color: black;
+}
+
+p {
+  width: 100%;
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 50px;
+}

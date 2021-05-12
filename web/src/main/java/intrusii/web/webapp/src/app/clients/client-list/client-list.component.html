@@ -28,9 +28,16 @@
       </ng-container>
 
       <ng-container matColumnDef="idCard">
-        <th mat-header-cell *matHeaderCellDef class="column"> ID Card </th>
+        <th mat-header-cell *matHeaderCellDef class="action"> ID Card </th>
         <td mat-cell *matCellDef="let client">
           <a class="action-button" routerLink="/clients/idCard/details" [state]="client.idCard"><mat-icon>account_box</mat-icon></a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="contracts">
+        <th mat-header-cell *matHeaderCellDef class="action"> Contracts </th>
+        <td mat-cell *matCellDef="let client">
+          <a class="action-button" routerLink="/clients/contracts" [state]="client"><mat-icon>receipt</mat-icon></a>
         </td>
       </ng-container>
 
@@ -42,8 +49,8 @@
         </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="['id','name', 'email', 'idCard', 'action']"></tr>
-      <tr mat-row  *matRowDef="let client; columns: ['id','name', 'email', 'idCard', 'action']"
+      <tr mat-header-row *matHeaderRowDef="['id','name', 'email', 'idCard', 'contracts', 'action']"></tr>
+      <tr mat-row  *matRowDef="let client; columns: ['id','name', 'email', 'idCard', 'contracts', 'action']"
           matTooltip="ID: {{client.id}}" [matTooltipPosition]="'after'" [matTooltipClass]="{'tooltip': true}"></tr>
     </table>
 

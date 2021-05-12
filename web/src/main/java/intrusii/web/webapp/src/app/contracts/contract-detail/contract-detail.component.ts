@@ -15,4 +15,8 @@ export class ContractDetailComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  hideDetails(): void {
+    location.reload();
+  }
 }

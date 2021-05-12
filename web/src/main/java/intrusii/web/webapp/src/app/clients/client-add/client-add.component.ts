@@ -9,6 +9,7 @@ import {
 } from "@angular/forms";
 import {Router} from "@angular/router";
 import {IDCard} from "../../idCards/shared/idCard.model";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-client-add',
@@ -22,7 +23,8 @@ export class ClientAddComponent implements OnInit {
 
   constructor(private clientService: ClientService,
               private formBuilder: FormBuilder,
-              private router: Router) { }
+              private router: Router,
+              private snack : MatSnackBar) { }
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
@@ -53,6 +55,7 @@ export class ClientAddComponent implements OnInit {
       email: this.formGroup.controls["email"].value
     }
     this.clientService.addClient(client)
-      .subscribe(() => this.router.navigate(['/clients']));
+      .subscribe(() => this.router.navigate(['/clients'])
+        .then(() => this.snack.open("Client successfully added", "x", {duration: 4000})));
   }
 }

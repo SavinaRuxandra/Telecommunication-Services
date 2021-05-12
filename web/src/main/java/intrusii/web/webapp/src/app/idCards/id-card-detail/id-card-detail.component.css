@@ -53,6 +53,10 @@ button:active{
   padding-left: 2px;
 }
 
+a:active {
+  color: black;
+}
+
 p {
   color: #4CAF50;
   margin-top: 10px;

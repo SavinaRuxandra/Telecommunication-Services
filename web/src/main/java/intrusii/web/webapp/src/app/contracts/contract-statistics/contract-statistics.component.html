@@ -1,0 +1,13 @@
+<button class="button-back">
+  <a href="/contracts"><mat-icon class = "icon-back">arrow_left</mat-icon></a>
+</button>
+
+<p> Contracts sold in every months </p>
+
+<div class="baseChart">
+  <canvas baseChart
+          [data]="chartData"
+          [labels]="chartLabels"
+          [colors]="chartColors"
+          [chartType]="chartType"></canvas>
+</div>

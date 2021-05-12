@@ -1,31 +1,78 @@
-<div *ngIf="contract">
-  <h2> Details </h2>
-  <table>
-    <tr>
-      <th>ID</th>
-      <th>Address</th>
-      <th>Date</th>
-      <th>Client ID</th>
-      <th>Client Name</th>
-      <th>Client CNP</th>
-      <th>Client Email</th>
-      <th>Subscription ID</th>
-      <th>Subscription Type</th>
-      <th>Subscription Duration</th>
-      <th>Subscription Price</th>
-    </tr>
-    <tr>
-      <td> {{contract.id}} </td>
-      <td> {{contract.address}} </td>
-      <td> {{contract.date | date: 'dd/MM/yyyy' }} </td>
-      <td> {{contract.client.id}} </td>
-      <td> {{contract.client.name}} </td>
-      <td> {{contract.client.idCard.cnp}} </td>
-      <td> {{contract.client.email}} </td>
-      <td> {{contract.subscription.id}} </td>
-      <td> {{contract.subscription.type}} </td>
-      <td> {{contract.subscription.duration}} </td>
-      <td> {{contract.subscription.price}} </td>
-    </tr>
-  </table>
+<div class="details" *ngIf="contract">
+
+  <div class="header">
+    <h2> Details </h2>
+    <button class="button-hide" (click)="hideDetails()"> hide details </button>
+  </div>
+
+  <div class="cards">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>Contract</mat-card-title>
+      <mat-card-subtitle>- details -</mat-card-subtitle>
+      <hr color="#4CAF50">
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>ID: <p>&nbsp;{{contract.id}}</p></mat-list-item>
+        <mat-list-item>Address: <p>&nbsp;{{contract.address}}</p></mat-list-item>
+        <mat-list-item>Date: <p>&nbsp;{{contract.date | date: 'dd/MM/yyyy'}}</p></mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>Client</mat-card-title>
+      <mat-card-subtitle>- details -</mat-card-subtitle>
+      <hr color="#4CAF50">
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>ID: <p>&nbsp;{{contract.client.id}}</p></mat-list-item>
+        <mat-list-item>Name: <p>&nbsp;{{contract.client.name}}</p></mat-list-item>
+        <mat-list-item>Email: <p>&nbsp;{{contract.client.email}}</p></mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>ID Card</mat-card-title>
+      <mat-card-subtitle>- details -</mat-card-subtitle>
+      <hr color="#4CAF50">
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>CNP: <p>&nbsp;{{contract.client.idCard.cnp}}</p></mat-list-item>
+        <mat-list-item>Nationality: <p>&nbsp;{{contract.client.idCard.nationality}}</p></mat-list-item>
+        <mat-list-item>Place Of Birth: <p>&nbsp;{{contract.client.idCard.placeOfBirth}}</p></mat-list-item>
+        <mat-list-item>Residence: <p>&nbsp;{{contract.client.idCard.residence}}</p></mat-list-item>
+        <mat-list-item>Sex: <p>&nbsp;{{contract.client.idCard.sex}}</p></mat-list-item>
+        <mat-list-item>Series: <p>&nbsp;{{contract.client.idCard.series}}</p></mat-list-item>
+        <mat-list-item>Number: <p>&nbsp;{{contract.client.idCard.number}}</p></mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>Subscription</mat-card-title>
+      <mat-card-subtitle>- details -</mat-card-subtitle>
+      <hr color="#4CAF50">
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>ID: <p>&nbsp;{{contract.subscription.id}}</p></mat-list-item>
+        <mat-list-item>Type: <p>&nbsp;{{contract.subscription.type}}</p></mat-list-item>
+        <mat-list-item>Price: <p>&nbsp;{{contract.subscription.price}}</p></mat-list-item>
+        <mat-list-item>Duration: <p>&nbsp;{{contract.subscription.duration}}</p></mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+  </div>
 </div>

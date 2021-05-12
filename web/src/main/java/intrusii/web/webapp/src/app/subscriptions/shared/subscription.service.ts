@@ -21,15 +21,13 @@ export class SubscriptionService {
   }
 
   deleteSubscription(id: number): Observable<Subscription> {
-    const urlDelete = `${this.subscriptionsUrl}/${id}`;
     return this.httpClient
-      .delete<Subscription>(urlDelete);
+      .delete<Subscription>(`${this.subscriptionsUrl}/${id}`);
   }
 
   updateSubscription(subscription: Subscription): Observable<Subscription> {
-    const urlUpdate = `${this.subscriptionsUrl}/${subscription.id}`;
     return this.httpClient
-      .put<Subscription>(urlUpdate, subscription);
+      .put<Subscription>(`${this.subscriptionsUrl}/${subscription.id}`, subscription);
   }
 
   getSubscriptions(): Observable<Subscription[]> {
@@ -39,38 +37,31 @@ export class SubscriptionService {
 
   sortSubscriptionsByType(isAsc: string): Observable<Subscription[]> {
     return this.httpClient
-      .get<Array<Subscription>>(this.subscriptionsUrl + "/sortByType/" + isAsc);
+      .get<Array<Subscription>>(`${this.subscriptionsUrl}/sortByType/${isAsc}`);
   }
 
   sortSubscriptionsByDuration(isAsc: string): Observable<Subscription[]> {
     return this.httpClient
-      .get<Array<Subscription>>(this.subscriptionsUrl + "/sortByDuration/" + isAsc);
+      .get<Array<Subscription>>(`${this.subscriptionsUrl}/sortByDuration/${isAsc}`);
   }
 
   sortSubscriptionsByPrice(isAsc: string): Observable<Subscription[]> {
     return this.httpClient
-      .get<Array<Subscription>>(this.subscriptionsUrl + "/sortByPrice/" + isAsc);
+      .get<Array<Subscription>>(`${this.subscriptionsUrl}/sortByPrice/${isAsc}`);
   }
 
   filterSubscriptionsByType(type: string): Observable<Subscription[]> {
     return this.httpClient
-      .get<Array<Subscription>>(this.subscriptionsUrl + "/filterByType/" + type);
+      .get<Array<Subscription>>(`${this.subscriptionsUrl}/filterByType/${type}`);
   }
 
   filterSubscriptionsByDuration(duration: string): Observable<Subscription[]> {
     return this.httpClient
-      .get<Array<Subscription>>(this.subscriptionsUrl + "/filterByDuration/" + duration);
+      .get<Array<Subscription>>(`${this.subscriptionsUrl}/filterByDuration/${duration}`);
   }
 
   filterSubscriptionsByPrice(price: string): Observable<Subscription[]> {
-    console.log(this.subscriptionsUrl + "/filterByPrice/" + price)
     return this.httpClient
-      .get<Array<Subscription>>(this.subscriptionsUrl + "/filterByPrice/" + price + '.');
-
-  }
-
-  getSubscriptionById(id: number): Observable<Subscription> {
-    return this.httpClient
-      .post<Subscription>(this.subscriptionsUrl + "/byId", id);
+      .get<Array<Subscription>>(`${this.subscriptionsUrl}/filterByPrice/${price}.`);
   }
 }

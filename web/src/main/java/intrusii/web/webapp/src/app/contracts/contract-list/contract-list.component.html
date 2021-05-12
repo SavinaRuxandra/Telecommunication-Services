@@ -1,11 +1,16 @@
 
 <div class = "container">
 
-  <mat-form-field class = "search-bar">
+  <div class = "header">
+  <a class="report" routerLink="/contracts/filterActive">Active contracts</a>
+  <a class="report" routerLink="/contracts/statistics">Statistics</a>
+
+    <mat-form-field class = "search-bar">
     <mat-label>Search</mat-label>
     <input matInput type="text" autocomplete="off" placeholder="Search" [formControl]="formFilter">
     <mat-icon matPrefix aria-hidden="false">search</mat-icon>
   </mat-form-field>
+  </div>
 
   <div class = "mat-elevation-z9">
     <table mat-table [dataSource]="dataSource" class = "contracts" matSort>
@@ -46,7 +51,10 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="['id', 'clientName', 'subscriptionType', 'address', 'date', 'action']"></tr>
-      <tr mat-row *matRowDef="let contract; columns: ['id', 'clientName', 'subscriptionType', 'address', 'date', 'action']" [class.selected]="contract === selectedContract" (click)="onSelect(contract)"></tr>
+      <tr mat-row *matRowDef="let contract; columns: ['id', 'clientName', 'subscriptionType', 'address', 'date', 'action']"
+          matTooltip="ID: {{contract.id}}" [matTooltipPosition]="'after'" [matTooltipClass]="{'tooltip': true}"
+      [class.selected]="contract === selectedContract" (click)="onSelect(contract)"></tr>
+
     </table>
 
     <mat-toolbar>

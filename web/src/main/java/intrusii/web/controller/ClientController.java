@@ -1,9 +1,12 @@
 package intrusii.web.controller;
 
 import intrusii.core.model.Client;
+import intrusii.core.model.Contract;
 import intrusii.core.service.ClientService;
 import intrusii.web.converter.ClientConverter;
+import intrusii.web.converter.ContractConverter;
 import intrusii.web.dto.ClientDto;
+import intrusii.web.dto.ContractDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,9 @@ public class ClientController {
 
     @Autowired
     private ClientConverter clientConverter;
+
+    @Autowired
+    private ContractConverter contractConverter;
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     ClientDto addClient(@RequestBody ClientDto clientDto){
@@ -69,10 +75,11 @@ public class ClientController {
     List<ClientDto> getAllClients() {
         log.trace("getAllClients - method entered");
 
-        List<Client> clients = clientService.getAllClients();
+        List<ClientDto> clientsDto = clientConverter.convertModelsToDtos(
+                clientService.getAllClients());
 
-        log.trace("getAllClients - method finished: clients={}", clients);
-        return clientConverter.convertModelsToDtos(clients);
+        log.trace("getAllClients - method finished: clients={}", clientsDto);
+        return clientsDto;
     }
 
     @RequestMapping(value = "/byId", method = RequestMethod.POST)
@@ -86,23 +93,36 @@ public class ClientController {
         return clientDto;
     }
 
-    @RequestMapping(value = "/filterByName", method = RequestMethod.POST)
-    List<ClientDto> filterClientsByName(@RequestBody String name) {
-        log.trace("filterClientByDuration - method entered");
+    @RequestMapping(value = "/contracts/{id}")
+    List<ContractDto> getContractsOfClient(@PathVariable Long id) {
+        log.trace("getContractsOfClient - method entered: id={}", id);
 
-        List<Client> clients = clientService.filterClientsByName(name);
+        List<ContractDto> contractsDto = contractConverter.convertModelsToDtos(
+                clientService.getContractsOfClient(id));
 
-        log.trace("filterClientByDuration - method finished: clients={}", clients);
-        return clientConverter.convertModelsToDtos(clients);
+        log.trace("getContractsOfClient - method finished: contracts={}", contractsDto);
+        return contractsDto;
     }
 
-    @RequestMapping(value = "/filterByCnp", method = RequestMethod.POST)
-    List<ClientDto> filterClientsByCnp(@RequestBody String cnp) {
+    @RequestMapping(value = "/filterByName/{name}")
+    List<ClientDto> filterClientsByName(@PathVariable String name) {
+        log.trace("filterClientByDuration - method entered");
+
+        List<ClientDto> clientsDto = clientConverter.convertModelsToDtos(
+                clientService.filterClientsByName(name));
+
+        log.trace("filterClientByDuration - method finished: clients={}", clientsDto);
+        return clientsDto;
+    }
+
+    @RequestMapping(value = "/filterByCnp/{cnp}")
+    List<ClientDto> filterClientsByCnp(@PathVariable String cnp) {
         log.trace("filterClientByType - method entered");
 
-        List<Client> clients = clientService.filterClientsByCnp(cnp);
+        List<ClientDto> clientsDto = clientConverter.convertModelsToDtos(
+                clientService.filterClientsByCnp(cnp));
 
-        log.trace("filterClientByType - method finished: clients={}", clients);
-        return clientConverter.convertModelsToDtos(clients);
+        log.trace("filterClientByType - method finished: clients={}", clientsDto);
+        return clientsDto;
     }
 }

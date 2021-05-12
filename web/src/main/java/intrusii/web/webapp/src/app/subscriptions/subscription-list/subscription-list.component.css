@@ -108,7 +108,7 @@ mat-radio-button {
 
 /deep/ .tooltip {
   background-color: #4CAF50;
-  color: black;
+  color: white;
 }
 
 input {

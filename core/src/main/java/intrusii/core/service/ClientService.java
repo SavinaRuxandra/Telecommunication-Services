@@ -1,6 +1,7 @@
 package intrusii.core.service;
 
 import intrusii.core.model.Client;
+import intrusii.core.model.Contract;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ public interface ClientService {
     List<Client> getAllClients();
 
     Client getClientById(Long id);
+
+    List<Contract> getContractsOfClient(Long client);
 
     List<Client> filterClientsByName(String name);
 

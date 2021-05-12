@@ -34,15 +34,20 @@ import { ClientUpdateComponent } from './clients/client-update/client-update.com
 import { SubscriptionDeleteComponent } from './subscriptions/subscription-delete/subscription-delete.component';
 import { SubscriptionAddComponent } from './subscriptions/subscription-add/subscription-add.component';
 import { SubscriptionUpdateComponent } from './subscriptions/subscription-update/subscription-update.component';
-import { MatRadioModule} from "@angular/material/radio";
+import { MatRadioModule } from "@angular/material/radio";
 import { ContractDeleteComponent } from './contracts/contract-delete/contract-delete.component';
 import { ContractAddComponent } from './contracts/contract-add/contract-add.component';
 import { ContractUpdateComponent } from './contracts/contract-update/contract-update.component';
 import { SubscriptionDetailComponent } from './subscriptions/subscription-detail/subscription-detail.component';
-import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatNativeDateModule} from "@angular/material/core";
-import {MatTooltipModule} from "@angular/material/tooltip";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material/core";
+import { MatTooltipModule } from "@angular/material/tooltip";
 import { IdCardDetailComponent } from './idCards/id-card-detail/id-card-detail.component';
+import { ContractActiveComponent } from './contracts/contract-active/contract-active.component';
+import { ContractStatisticsComponent } from './contracts/contract-statistics/contract-statistics.component';
+import {ChartsModule} from "ng2-charts";
+import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import { ClientContractsComponent } from './clients/client-contracts/client-contracts.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +70,9 @@ import { IdCardDetailComponent } from './idCards/id-card-detail/id-card-detail.c
     ContractUpdateComponent,
     SubscriptionDetailComponent,
     IdCardDetailComponent,
+    ContractActiveComponent,
+    ContractStatisticsComponent,
+    ClientContractsComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,7 +95,9 @@ import { IdCardDetailComponent } from './idCards/id-card-detail/id-card-detail.c
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTooltipModule
+    MatTooltipModule,
+    ChartsModule,
+    MatSnackBarModule
   ],
   providers: [ClientService, SubscriptionService, ContractService],
   bootstrap: [AppComponent]

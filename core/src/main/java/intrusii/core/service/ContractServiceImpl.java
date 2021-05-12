@@ -7,18 +7,24 @@ import intrusii.core.repository.SubscriptionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
-public class ContractServiceImpl implements ContractService{
+public class ContractServiceImpl implements ContractService {
 
     public static final Logger log = LoggerFactory.getLogger(ContractServiceImpl.class);
 
@@ -109,5 +115,31 @@ public class ContractServiceImpl implements ContractService{
         List<Contract> contracts = StreamSupport.stream(contractsIterable.spliterator(), false).filter(function).collect(Collectors.toList());
         log.trace("filterGeneric - method finished: contracts={}", contracts);
         return contracts;
+    }
+
+    @Override
+    public List<Pair<String, Integer>> getStatistics() {
+        List<Pair<String, Integer>> pairs = new ArrayList<>();
+        List<Contract> contracts = contractRepository.findAll();
+
+        List<String> contractsDate = contracts.stream()
+                .map(s -> s.getDate().getMonth().toString())
+                .collect(Collectors.toList());
+
+        Map<String, Long> counted = contractsDate.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        counted.forEach((key, value) -> pairs.add(Pair.of(key, Math.toIntExact(value))));
+
+        pairs.sort((a, b) -> {
+            SimpleDateFormat sdf = new SimpleDateFormat("MMMMM");
+            try {
+                return sdf.parse(a.getFirst()).compareTo(sdf.parse(b.getFirst()));
+            } catch (ParseException e) {
+                return a.getFirst().compareTo(b.getFirst());
+            }
+        });
+
+        return pairs;
     }
 }
