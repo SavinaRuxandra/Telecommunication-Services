@@ -6,7 +6,6 @@ war {
     zip64 true
 }
 
-
 dependencies {
     compile project(':core')
 

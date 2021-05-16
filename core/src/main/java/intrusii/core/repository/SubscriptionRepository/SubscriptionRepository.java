@@ -1,7 +1,8 @@
-package intrusii.core.repository;
+package intrusii.core.repository.SubscriptionRepository;
 
 import intrusii.core.model.Subscription;
 import intrusii.core.model.SubscriptionType;
+import intrusii.core.repository.Repository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

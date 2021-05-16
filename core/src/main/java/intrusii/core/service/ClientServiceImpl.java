@@ -4,8 +4,7 @@ import intrusii.core.model.Client;
 import intrusii.core.model.Contract;
 import intrusii.core.model.validators.ClientValidator;
 import intrusii.core.model.validators.ValidatorException;
-import intrusii.core.repository.ClientRepository;
-import intrusii.core.repository.ContractRepository;
+import intrusii.core.repository.ClientRepository.ClientRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,6 +102,16 @@ public class ClientServiceImpl implements ClientService {
 
         log.trace("getContractsOfClient - method finished: contracts={}", contracts);
         return contracts;
+    }
+
+    @Override
+    public List<Client> getClientsWithContracts() {
+        log.trace("getClientsWithContracts - method entered");
+
+        List<Client> clients = clientRepository.findAllWithContracts();
+
+        log.trace("getClientsWithContracts - method finished: clients={}", clients);
+        return clients;
     }
 
     @Override

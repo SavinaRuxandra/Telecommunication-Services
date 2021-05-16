@@ -2,11 +2,25 @@ package intrusii.core.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
+import javax.persistence.*;
 import java.util.List;
+
+@NamedEntityGraphs({
+        @NamedEntityGraph(name = "clientsWithContracts",
+                attributeNodes = @NamedAttributeNode(value = "contracts")),
+
+        @NamedEntityGraph(name = "clientsWithContractsAndSubscription",
+                attributeNodes = {
+                    @NamedAttributeNode(value = "contracts"),
+                    @NamedAttributeNode(value = "subscription", subgraph = "contractsWithSubscription")
+                },
+                subgraphs = {
+                    @NamedSubgraph(name = "contractsWithSubscription", attributeNodes = {
+                        @NamedAttributeNode(value = "subscription")
+                    })
+                }
+        )
+})
 
 @Entity
 @NoArgsConstructor
@@ -19,8 +33,8 @@ public class Client extends BaseEntity<Long> {
     private IDCard idCard;
     private String name;
     private String email;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "client")
-    private List<Contract> contracts = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.REMOVE)
+    private List<Contract> contracts;
 
     public IDCard getIDCard() {
         return idCard;

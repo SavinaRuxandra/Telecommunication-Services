@@ -1,22 +1,37 @@
 
+tasks.withType(JavaCompile) {
+    options.annotationProcessorGeneratedSourcesDirectory = file("src/main/generated")
+}
+
+
+sourceSets {
+    generated {
+        java {
+            srcDirs = ['src/main/generated']
+        }
+    }
+}
 
 dependencies {
-    //jpa
+    //JPA + SPRING
     compile group: 'org.springframework', name: 'spring-context-support', version: "$springVersion"
     compile group: 'org.springframework', name: 'spring-orm', version: "$springVersion"
     compile(group: 'org.springframework.data', name: 'spring-data-jpa', version: "$springDataVersion")
 
-    compile group: 'org.hibernate', name: 'hibernate-core', version: "$hibernateVersion"
-
-    compile group: 'org.postgresql', name: 'postgresql', version: "$postgresqlVersion"
-//    compile group: 'postgresql', name: 'postgresql', version: "$jdbcpostgreSqlVersion"
-    //---
-
     compile group: 'org.springframework', name: 'spring-jdbc', version: "$springVersion"
-//    compile group: 'org.postgresql', name: 'postgresql', version: "$postgresqlVersion"
     compile group: 'org.apache.commons', name: 'commons-dbcp2', version: "$dbcpVersion"
 
+    //HIBERNATE
+    compile group: 'org.hibernate', name: 'hibernate-core', version: "$hibernateVersion"
 
+    // https://mvnrepository.com/artifact/org.hibernate/hibernate-jpamodelgen
+    compile group: 'org.hibernate', name: 'hibernate-jpamodelgen', version: "$hibernateVersion"
+    annotationProcessor group: 'org.hibernate', name: 'hibernate-jpamodelgen', version: "$hibernateVersion"
+
+    //POSTGRES
+    compile group: 'org.postgresql', name: 'postgresql', version: "$postgresqlVersion"
+
+    //WEIRD
     compile group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: "$caffeineVersion"
     compile group: 'com.zaxxer', name: 'HikariCP', version: "$hikariVersion"
 

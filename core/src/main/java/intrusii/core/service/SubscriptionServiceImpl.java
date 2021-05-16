@@ -4,8 +4,8 @@ import intrusii.core.model.Subscription;
 import intrusii.core.model.SubscriptionType;
 import intrusii.core.model.validators.Validator;
 import intrusii.core.model.validators.ValidatorException;
-import intrusii.core.repository.ContractRepository;
-import intrusii.core.repository.SubscriptionRepository;
+import intrusii.core.repository.ContractRepository.ContractRepository;
+import intrusii.core.repository.SubscriptionRepository.SubscriptionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 @Service

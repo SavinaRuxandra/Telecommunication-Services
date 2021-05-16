@@ -19,6 +19,8 @@ public interface ClientService {
 
     List<Contract> getContractsOfClient(Long client);
 
+    List<Client> getClientsWithContracts();
+
     List<Client> filterClientsByName(String name);
 
     List<Client> filterClientsByCnp(String cnp);

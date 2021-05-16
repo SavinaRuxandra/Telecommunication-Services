@@ -1,9 +1,9 @@
 package intrusii.core.service;
 
 import intrusii.core.model.Contract;
-import intrusii.core.repository.ClientRepository;
-import intrusii.core.repository.ContractRepository;
-import intrusii.core.repository.SubscriptionRepository;
+import intrusii.core.repository.ClientRepository.ClientRepository;
+import intrusii.core.repository.ContractRepository.ContractRepository;
+import intrusii.core.repository.SubscriptionRepository.SubscriptionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

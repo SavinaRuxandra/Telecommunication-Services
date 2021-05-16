@@ -5,6 +5,14 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@NamedEntityGraphs(
+        @NamedEntityGraph(name = "contracts",
+        attributeNodes = {
+                @NamedAttributeNode(value = "client"),
+                @NamedAttributeNode(value = "subscription")
+        })
+)
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,11 +21,11 @@ import java.time.LocalDate;
 @ToString(callSuper = true)
 @Builder
 public class Contract extends BaseEntity<Long> {
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @JoinColumn(name="clientId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="client")
     private Client client;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @JoinColumn(name="subscriptionId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="subscription")
     private Subscription subscription;
     private String address;
     private LocalDate date;

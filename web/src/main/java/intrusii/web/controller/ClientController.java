@@ -104,6 +104,17 @@ public class ClientController {
         return contractsDto;
     }
 
+    @RequestMapping(value = "/clientsWithContracts")
+    List<ClientDto> getClientsWithContracts() {
+        log.trace("getClientsWithContracts - method entered");
+
+        List<ClientDto> clientsDto = clientConverter.convertModelsToDtos(
+                clientService.getClientsWithContracts());
+
+        log.trace("getClientsWithContracts - method finished: clients={}", clientsDto);
+        return clientsDto;
+    }
+
     @RequestMapping(value = "/filterByName/{name}")
     List<ClientDto> filterClientsByName(@PathVariable String name) {
         log.trace("filterClientByDuration - method entered");
