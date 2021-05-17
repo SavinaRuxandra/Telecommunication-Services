@@ -2,6 +2,7 @@ package intrusii.core.service;
 
 import intrusii.core.model.Client;
 import intrusii.core.model.Contract;
+import intrusii.core.model.SubscriptionType;
 import intrusii.core.model.validators.ClientValidator;
 import intrusii.core.model.validators.ValidatorException;
 import intrusii.core.repository.ClientRepository.ClientRepository;
@@ -111,6 +112,16 @@ public class ClientServiceImpl implements ClientService {
         List<Client> clients = clientRepository.findAllWithContracts();
 
         log.trace("getClientsWithContracts - method finished: clients={}", clients);
+        return clients;
+    }
+
+    @Override
+    public List<Client> filterClientsBySubscriptionType(SubscriptionType subscriptionType) {
+        log.trace("getClientsBySubscriptionType - method entered, subscriptionType={}", subscriptionType);
+
+        List<Client> clients = clientRepository.findAllWithSubscriptionType(subscriptionType);
+
+        log.trace("getClientsBySubscriptionType - method finished: clients={}", clients);
         return clients;
     }
 

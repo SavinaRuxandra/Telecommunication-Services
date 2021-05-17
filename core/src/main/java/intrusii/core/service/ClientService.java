@@ -2,6 +2,7 @@ package intrusii.core.service;
 
 import intrusii.core.model.Client;
 import intrusii.core.model.Contract;
+import intrusii.core.model.SubscriptionType;
 
 import java.util.List;
 
@@ -20,6 +21,8 @@ public interface ClientService {
     List<Contract> getContractsOfClient(Long client);
 
     List<Client> getClientsWithContracts();
+
+    List<Client> filterClientsBySubscriptionType(SubscriptionType subscriptionType);
 
     List<Client> filterClientsByName(String name);
 

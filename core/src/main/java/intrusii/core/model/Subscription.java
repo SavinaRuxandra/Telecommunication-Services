@@ -11,7 +11,7 @@ import javax.persistence.Enumerated;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
+//@ToString(callSuper = true)
 @Builder
 public class Subscription extends BaseEntity<Long> {
     @Enumerated(EnumType.STRING)

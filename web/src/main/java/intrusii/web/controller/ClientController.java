@@ -2,6 +2,7 @@ package intrusii.web.controller;
 
 import intrusii.core.model.Client;
 import intrusii.core.model.Contract;
+import intrusii.core.model.SubscriptionType;
 import intrusii.core.service.ClientService;
 import intrusii.web.converter.ClientConverter;
 import intrusii.web.converter.ContractConverter;
@@ -112,6 +113,21 @@ public class ClientController {
                 clientService.getClientsWithContracts());
 
         log.trace("getClientsWithContracts - method finished: clients={}", clientsDto);
+        return clientsDto;
+    }
+
+    @RequestMapping(value = "/filterBySubscriptionType/{subscriptionType}")
+    List<ClientDto> getClientsBySubscriptionType(@PathVariable String subscriptionType) {
+        log.trace("getClientsBySubscriptionType - method entered");
+
+        List<ClientDto> clientsDto = new ArrayList<>();
+
+        if(subscriptionType.equals("Internet") || subscriptionType.equals("TV") || subscriptionType.equals("Phone")) {
+            clientsDto = clientConverter.convertModelsToDtos(
+                    clientService.filterClientsBySubscriptionType(SubscriptionType.valueOf(subscriptionType)));
+        }
+
+        log.trace("getClientsBySubscriptionType - method finished: clients={}", clientsDto);
         return clientsDto;
     }
 

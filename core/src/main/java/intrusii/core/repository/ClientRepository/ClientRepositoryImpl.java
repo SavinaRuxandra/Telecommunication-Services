@@ -1,18 +1,18 @@
 package intrusii.core.repository.ClientRepository;
 
 import intrusii.core.model.Client;
+import intrusii.core.model.SubscriptionType;
 import intrusii.core.repository.CustomRepositorySupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
 
-
 public class ClientRepositoryImpl extends CustomRepositorySupport implements ClientRepositoryCustom {
 
     @Autowired
-    @Qualifier("SQL")
-    ClientRepositoryCustom clientRepositoryCustom;
+    @Qualifier("JPQL")
+    private ClientRepositoryCustom clientRepositoryCustom;
 
     @Override
     public List<Client> findAllWithContracts() {
@@ -20,7 +20,7 @@ public class ClientRepositoryImpl extends CustomRepositorySupport implements Cli
     }
 
     @Override
-    public List<Client> findAllWithSubscriptionType(String type) {
+    public List<Client> findAllWithSubscriptionType(SubscriptionType type) {
         return clientRepositoryCustom.findAllWithSubscriptionType(type);
     }
 }

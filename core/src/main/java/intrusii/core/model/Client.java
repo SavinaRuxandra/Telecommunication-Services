@@ -9,31 +9,31 @@ import java.util.List;
         @NamedEntityGraph(name = "clientsWithContracts",
                 attributeNodes = @NamedAttributeNode(value = "contracts")),
 
-        @NamedEntityGraph(name = "clientsWithContractsAndSubscription",
-                attributeNodes = {
-                    @NamedAttributeNode(value = "contracts"),
-                    @NamedAttributeNode(value = "subscription", subgraph = "contractsWithSubscription")
-                },
-                subgraphs = {
-                    @NamedSubgraph(name = "contractsWithSubscription", attributeNodes = {
-                        @NamedAttributeNode(value = "subscription")
-                    })
-                }
-        )
+//        @NamedEntityGraph(name = "clientsWithContractsAndSubscription",
+//                attributeNodes = {
+//                    @NamedAttributeNode(value = "contracts"),
+//                    @NamedAttributeNode(value = "subscription", subgraph = "contractsWithSubscription")
+//                },
+//                subgraphs = {
+//                    @NamedSubgraph(name = "contractsWithSubscription", attributeNodes = {
+//                        @NamedAttributeNode(value = "subscription")
+//                    })
+//                }
+//        )
 })
-
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
+//@ToString(callSuper = true)
 @Builder
 public class Client extends BaseEntity<Long> {
     private IDCard idCard;
     private String name;
     private String email;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.REMOVE)
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.ALL)
     private List<Contract> contracts;
 
     public IDCard getIDCard() {

@@ -17,10 +17,13 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(exclude = {"client", "subscription"}, callSuper = true)
+//@ToString(callSuper = true)
+@ToString(exclude = {"client", "subscription"})
 @Builder
 public class Contract extends BaseEntity<Long> {
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="client")
     private Client client;

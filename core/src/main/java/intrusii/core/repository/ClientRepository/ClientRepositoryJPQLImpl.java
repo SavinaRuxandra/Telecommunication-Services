@@ -1,6 +1,7 @@
 package intrusii.core.repository.ClientRepository;
 
 import intrusii.core.model.Client;
+import intrusii.core.model.SubscriptionType;
 import intrusii.core.repository.CustomRepositorySupport;
 import org.springframework.stereotype.Repository;
 
@@ -22,14 +23,15 @@ public class ClientRepositoryJPQLImpl extends CustomRepositorySupport implements
     }
 
     @Override
-    public List<Client> findAllWithSubscriptionType(String type) {
+    public List<Client> findAllWithSubscriptionType(SubscriptionType subscriptionType) {
         System.out.println("---JPQL---");
         EntityManager entityManager = getEntityManager();
         Query query = entityManager.createQuery("select distinct cl from Client cl " +
-                                                "left join fetch cl.contracts co" +
-                                                "left join fetch  co.subscription");
+                "left join fetch cl.contracts co " +
+                "left join fetch co.subscription s " +
+                "where s.type = ?1");
 
-        List<Client> clients = query.getResultList();
+        List<Client> clients = query.setParameter(1, subscriptionType).getResultList();
 
         return clients;
     }
